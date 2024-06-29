@@ -1,0 +1,3 @@
+﻿@model CNPM.Models.Category
+@Html.DropDownListFor(model=>model.ID,
+new SelectList(Model.listCate.OrderBy(model=>model.name),"ID","name"),"Select Category")

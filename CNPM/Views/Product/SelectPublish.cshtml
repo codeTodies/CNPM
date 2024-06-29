@@ -1,0 +1,3 @@
+﻿@model CNPM.Models.Publisher
+@Html.DropDownListFor(model => model.ID,
+new SelectList(Model.listPublisher.OrderBy(model => model.name), "ID", "name"), "Select Publisher")

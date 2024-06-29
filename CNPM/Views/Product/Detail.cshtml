@@ -1,0 +1,42 @@
+﻿@model CNPM.Models.Product_title
+
+@{
+    ViewBag.Title = "ProDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "ProDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="~/Content/style.css" rel="stylesheet" />
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="@Url.Content(Model.ImagePro)" class="card-img-top" alt="Product Image">
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(model => model.name)</h5>
+                    <p class="card-text">Năm sản xuất: @Html.DisplayFor(model => model.publishing_year)</p>
+                    <p class="card-text">NXB: @Html.DisplayFor(model => model.Publisher1.name)</p>
+                    <p class="card-text">Thể loại: @Html.DisplayFor(model => model.Category1.name)</p>
+                    <p class="card-text">Tác giả: @Html.DisplayFor(model => model.author)</p>
+                    <p class="card-text"> @Html.DisplayFor(model => model.giaBia) đ</p>
+                    <a href="@Url.Action("Cart", "Home")" class="icon-link">
+                        <button type="submit" class="btn-login">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="sr-only">Thêm vào giỏ hàng</span>
+                        </button>
+                        <button type="submit" class="btn-default">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="sr-only">Mua ngay</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+

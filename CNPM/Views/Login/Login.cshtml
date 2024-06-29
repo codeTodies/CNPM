@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Đăng nhập</title>
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <table class=" table-Login">
+        <tr>
+            <td>
+                <div class="td-pick">Đăng nhập</div>
+            </td>
+            <td>
+                <div class="td-unpick" style="color:black">
+                    @Html.ActionLink("Đăng ký", "Signup", "Home")
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label> Email/ Số điện thoại </label>
+            </td>
+            <td class="td-box">
+                <div class="input-field">
+                    <input type="text" name="email" id="email" placeholder="Số điện thoại" required="">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label> Mật khẩu </label>
+            </td>
+            <td class="td-box">
+                <div class="input-field">
+                    <input type="password" name="password" id="password" placeholder="Mật khẩu" required="">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="text-align:end">@Html.ActionLink("Quên mật khẩu", "Login", "Home")</td>
+        </tr>
+    </table>
+
+    <div style="text-align:center">
+        <br />
+        <button type="submit" class="btn-login">Đăng nhập</button>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,370 @@
+﻿/* Button */
+.btn-login {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #ec3838; /* Red */
+    color: #ffffff; /* White */
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none; /* Remove default underline for links */
+}
+
+    .btn-login:hover {
+        background-color: #cc0000; /* Darker red on hover */
+    }
+
+/* Table */
+.table-Login {
+    width: 50%;
+    border: solid black;
+    align-content: center;
+    background-color: #ffffff;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+}
+
+.td-box {
+    text-align: center;
+}
+
+.td-pick {
+    border: solid black;
+    text-align: center;
+    background-color: #ec3838;
+    color: aliceblue;
+}
+
+.td-unpick {
+    border: solid black;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+}
+
+/* Top navbar */
+.topnav {
+    overflow: hidden;
+    background-color: #ec3838;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1000;
+}
+
+    .topnav a {
+        display: block;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        .topnav a:hover {
+            background-color: #cc0000;
+            color: white;
+        }
+
+        .topnav a.active {
+            background-color: #cc0000;
+            color: white;
+        }
+
+    .topnav .navbtn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        font-size: 10px;
+        margin-left: 10px; /* Adjust spacing between navbtn and other elements */
+    }
+
+        .topnav .navbtn button {
+            border-radius: 25px;
+            padding: 6px 10px;
+            background: #cc0000;
+            font-size: 10px;
+            border: none;
+            cursor: pointer;
+            color: white;
+        }
+
+            .topnav .navbtn button:hover {
+                background: #b81a1a; /* Darker red */
+            }
+
+        .topnav .navbtn .name {
+            margin-top: 5px;
+            color: black;
+            font-size: 14px;
+        }
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown button */
+.dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 16px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    cursor: pointer;
+    width: 100%;
+}
+
+    .dropbtn:hover {
+        background-color: #b81a1a;
+    }
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ec3838;
+    color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001; /* Higher z-index than other elements */
+}
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #ffffff;
+            color: #ec3838;
+        }
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Adjusted styles for smaller screens */
+@media screen and (max-width: 768px) {
+    .topnav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+        .topnav .dropdown {
+            position: static; /* Reset position for smaller screens */
+            display: block; /* Ensure dropdown occupies full width */
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+            border-radius: 15px;
+        }
+
+            .topnav .dropdown .dropbtn {
+                margin-bottom: 10px; /* Optional: Space between dropdown and other items */
+            }
+
+        .topnav .dropdown-content {
+            position: static; /* Reset position for smaller screens */
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+            border-radius: 15px;
+            z-index: 1001;
+        }
+
+        .topnav .navbtn {
+            margin-left: 0; /* Adjust spacing for smaller screens */
+        }
+
+        .topnav .navbtn, .topnav a, .topnav input[type=text], .topnav .search-container button {
+            float: none;
+            display: block;
+            text-align: left;
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+            border-radius: 15px;
+        }
+
+        .topnav input[type=text] {
+            border: 1px solid #ec3838;
+        }
+}
+
+/* Search container and button */
+.topnav .search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 8px;
+}
+
+.topnav input[type=text] {
+    padding: 6px 40px 6px 6px;
+    border: none;
+    font-size: 17px;
+    color: #808080;
+    box-sizing: border-box;
+    width: 100%; /* Adjust width for search input */
+    border-radius: 15px;
+}
+
+.topnav .search-container button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 15px;
+    padding: 6px 10px;
+    background: #cc0000;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+    .topnav .search-container button:hover {
+        background: #b81a1a; /* Darker red */
+    }
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+    }
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+    .active, .dot:hover {
+        background-color: #717171;
+    }
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+/*product card*/
+.card {
+    position: relative; /* Ensure relative positioning for child elements */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    border-radius: 15px;
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+    .card img {
+        width: 100%; /* Ensure the image takes full width of the card */
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+
+.card-content {
+    padding: 20px; /* Padding around the content */
+}
+
+.price {
+    color: #ec3838;
+    font-size: 22px;
+    margin-top: 10px; /* Add margin to separate price from other content */
+}
+
+.card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    margin-top: 15px; /* Add margin between price and button */
+}
+
+    .card button:hover {
+        opacity: 0.7;
+    }

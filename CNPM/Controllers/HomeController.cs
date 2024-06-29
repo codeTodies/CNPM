@@ -1,21 +1,23 @@
-﻿using System;
+﻿using CNPM.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace CNPM.Controllers
 {
     public class HomeController : Controller
     {
+        BookStoreEntities database = new BookStoreEntities();
         public ActionResult Index()
         {
-            return View();
+            return View(database.Product_title.ToList());
         }
 
-        public ActionResult About()
+        public ActionResult Signup()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
@@ -27,4 +29,5 @@ namespace CNPM.Controllers
             return View();
         }
     }
+
 }
