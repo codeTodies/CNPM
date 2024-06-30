@@ -140,6 +140,7 @@
     <Compile Include="Controllers\Login\LoginController.cs" />
     <Compile Include="Controllers\Product\ProductController.cs" />
     <Compile Include="Controllers\Publisher\PublisherController.cs" />
+    <Compile Include="Controllers\User\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,18 +193,19 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Image\bbtmh.jpg" />
     <Content Include="Content\Image\qc1.png" />
     <Content Include="Content\Image\qc2.png" />
     <Content Include="Content\Image\qc3.png" />
     <Content Include="Content\Image\qc4.png" />
     <Content Include="Content\Image\qc5.png" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image\images.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -263,6 +265,13 @@
     <Content Include="Views\Publisher\Delete.cshtml" />
     <Content Include="Views\Publisher\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Login\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

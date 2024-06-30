@@ -52,15 +52,26 @@
                 <div class="name">Giỏ hàng</div>
             </div>
 
-            <div class="navbtn">
-                <a href="@Url.Action("Login", "Home")" class="icon-link">
-                    <button type="submit">
-                        <i class="fa-solid fa-user"></i>
-                        <span class="sr-only">Tài khoản</span>
+            @if (Session["NameUser"] == null)
+            {
+                <form class="form-inline my-2 my-lg-0 pr-4">
+                    <button class="blue-btn btn-primary my-2 my-sm-0">
+                        @Html.ActionLink("Đăng Nhập", "Login", "Login", null,@*new { @class = "Blue" },*@new { Style = "color:#ffffff;text-decoration:none" })
                     </button>
-                </a>
-                <div class="name">Tài khoản</div>
-            </div>
+                </form>
+            }
+            @if (Session["NameUser"] != null)
+            {
+                <div class="navbtn">
+                    <a href="@Url.Action("Login", "Login")" class="icon-link">
+                        <button type="submit">
+                            <i class="fa-solid fa-user"></i>
+                            <span class="sr-only">Tài khoản</span>
+                        </button>
+                    </a>
+                    <div class="name">Tài khoản</div>
+                </div>
+            }
         </div>
     </header>
 

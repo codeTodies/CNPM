@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.Net;
 
 namespace CNPM.Controllers.Product
 {
@@ -87,6 +88,117 @@ namespace CNPM.Controllers.Product
         public ActionResult Detail(int id)
         {
             return View(db.Product_title.Where(s => s.ID == id).FirstOrDefault());
+        }
+        public ActionResult Edit(int? id)
+        {
+            var product = db.Product_title.Where(s => s.ID == id).FirstOrDefault();
+            ViewBag.Cate = new SelectList(db.Categories.OrderBy(r => r.name), "ID", "name", product.category);
+            ViewBag.Publish = new SelectList(db.Publishers.OrderBy(r => r.name), "ID", "name", product.publisher);
+            Session["imgPath"] = product.ImagePro;
+            if (product == null)
+            {
+                return HttpNotFound(); // Trả về lỗi 404 nếu không tìm thấy đối tượng
+            }
+
+            return View(product);
+        }
+
+        // POST: Regions/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public ActionResult Edit(Product_title product)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (product.UploadImage != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(product.UploadImage.FileName);
+                    string extend = Path.GetExtension(product.UploadImage.FileName);
+                    fileName = fileName + extend;
+                    product.ImagePro = "~/image/" + fileName;
+                    if (extend.ToLower() == ".jpg" || extend.ToLower() == ".jpeg" || extend.ToLower() == ".png")
+                    {
+                        if (product.UploadImage.ContentLength <= 6000000)
+                        {
+                            db.Entry(product).State = EntityState.Modified;
+
+                            string oldImgPath = Request.MapPath(Session["imgPath"].ToString());
+                            if (db.SaveChanges() > 0)
+                            {
+                                product.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/image/"), fileName));
+                                if (System.IO.File.Exists(oldImgPath))
+                                {
+                                    System.IO.File.Delete(oldImgPath);
+                                }
+                                TempData["nofi"] = "Cập nhật thành công";
+                                return RedirectToAction("Index");
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.nofi = "File Size must be Equal or less than 6mb";
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.nofi = "Invalid File Type";
+                    }
+                }
+                else
+                {
+                    product.ImagePro = Session["imgPath"].ToString();
+                    db.Entry(product).State = EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                    {
+                        TempData["nofi"] = "Cập nhật thành công";
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            return View();
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product_title product = db.Product_title.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
+        // POST: Regions/Delete/5
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            var product = db.Product_title.Where(s => s.ID == id).FirstOrDefault();
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            string curImg = Request.MapPath(product.ImagePro);
+            db.Entry(product).State = EntityState.Deleted;
+            if (db.SaveChanges() > 0)
+            {
+                if (System.IO.File.Exists(curImg))
+                {
+                    System.IO.File.Delete(curImg);
+                }
+                TempData["nofi"] = "Xóa thành công";
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
