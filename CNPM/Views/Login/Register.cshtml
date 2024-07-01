@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="@Url.Content("~/Content/login.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/style.css" rel="stylesheet" />
 </head>
 <body>
     <div class="wrapper">
@@ -20,42 +21,44 @@
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <form action="">
-                <h1>Đăng ký</h1>
-                <div class="input-box">
-                    @Html.TextBox("name", null, new { @class = "form-control input_user", placeholder = "Tên đăng nhập" })
-                    <i class='bx bxs-user'></i>
-                    <div>
-                        @Html.ValidationMessageFor(model => model.name)
-                    </div>
-                </div>
-
-                <div class="input-box">
-                    @Html.Password("password", null, new { @class = "form-control input_pass", placeholder = "Mật khẩu" })
-                    <i class='bx bxs-lock-alt'></i>
-                </div>
+        <form action="">
+            <h1>Đăng ký</h1>
+            <div class="input-box">
+                @Html.TextBox("name", null, new { @class = "form-control input_user", placeholder = "Tên đăng nhập" })
+                <i class='bx bxs-user'></i>
                 <div>
-                    @Html.ValidationMessageFor(model => model.password)
+                    @Html.ValidationMessageFor(model => model.name)
                 </div>
-                <div class="input-box">
-                    @Html.TextBox("email", null, new { @class = "form-control input_pass", placeholder = "Email" })
-                    <i class='bx bxs-lock-alt'></i>
-                    <div>
-                        @Html.ValidationMessageFor(model => model.email)
-                    </div>
+            </div>
+
+            <div class="input-box">
+                @Html.Password("password", null, new { @class = "form-control input_pass", placeholder = "Mật khẩu" })
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div>
+                @Html.ValidationMessageFor(model => model.password)
+            </div>
+            <div class="input-box">
+                @Html.TextBox("email", null, new { @class = "form-control input_pass", placeholder = "Email" })
+                <i class='bx bxs-lock-alt'></i>
+                <div>
+                    @Html.ValidationMessageFor(model => model.email)
                 </div>
-                <div class="input-box">
-                    @Html.TextBox("phone", null, new { @class = "form-control input_pass", placeholder = "Số điện thoại" })
-                    <i class='bx bxs-lock-alt'></i>
-                    <div>
-                        @Html.ValidationMessageFor(model => model.phone)
-                    </div>
+            </div>
+            <div class="input-box">
+                @Html.TextBox("phone", null, new { @class = "form-control input_pass", placeholder = "Số điện thoại" })
+                <i class='bx bxs-lock-alt'></i>
+                <div>
+                    @Html.ValidationMessageFor(model => model.phone)
                 </div>
-                <button type="submit" class="btn login_btn">Đăng ký</button>
-                <div class="register-link">
-                    <p>Đã Có tài khoản ? <a href="~/Login/Login">Đăng nhập</a></p>
-                </div>
-            </form>
+            </div>
+            <div style="text-align:center">
+                <button type="submit" class="btn-login">Đăng ký</button>
+            </div>
+            <div class="register-link">
+                <p>Đã Có tài khoản ? <a href="~/Login/Login">Đăng nhập</a></p>
+            </div>
+        </form>
         }
     </div>
     <script>

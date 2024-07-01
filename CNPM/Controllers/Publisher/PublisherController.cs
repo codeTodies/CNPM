@@ -15,7 +15,7 @@ namespace CNPM.Controllers.Publisher
     public class PublisherController : Controller
     {
 
-        BookStoreEntities db = new BookStoreEntities();
+        BookStoreEntities1 db = new BookStoreEntities1();
         public ActionResult Index(string SortOrder, string currentFilter, string SearchString, int? page)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(SortOrder) ? "Name_desc" : "";
@@ -60,7 +60,7 @@ namespace CNPM.Controllers.Publisher
             {
                         db.Publishers.Add(publisher);
                         db.SaveChanges();
-                        return RedirectToAction("Index","Home");
+                        return RedirectToAction("Index","Publisher");
             }
             catch
             {

@@ -16,7 +16,7 @@ namespace CNPM.Controllers.Categories
 {
     public class CategoriesController : Controller
     {
-        BookStoreEntities  db = new BookStoreEntities();
+        BookStoreEntities1  db = new BookStoreEntities1();
         public ActionResult Index(string SortOrder, string currentFilter, string SearchString, int? page)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(SortOrder) ? "Name_desc" : "";
@@ -58,7 +58,7 @@ namespace CNPM.Controllers.Categories
         {
                 db.Categories.Add(category);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
 
         }
         public ActionResult Edit(int? id)

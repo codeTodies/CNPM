@@ -1,6 +1,7 @@
 ﻿using CNPM.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.IO;
@@ -9,11 +10,16 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using System.Net;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Web.Security;
+
+
 namespace CNPM.Controllers.Login
 {
     public class LoginController : Controller
     {
-        BookStoreEntities db = new BookStoreEntities();
+        BookStoreEntities1 db = new BookStoreEntities1();
         // GET: Login
         public ActionResult Login()
         {
@@ -57,6 +63,12 @@ namespace CNPM.Controllers.Login
             }
 
             return View(user);
+        }
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

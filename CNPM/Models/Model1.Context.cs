@@ -13,10 +13,10 @@ namespace CNPM.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BookStoreEntities : DbContext
+    public partial class BookStoreEntities1 : DbContext
     {
-        public BookStoreEntities()
-            : base("name=BookStoreEntities")
+        public BookStoreEntities1()
+            : base("name=BookStoreEntities1")
         {
         }
     
@@ -32,7 +32,6 @@ namespace CNPM.Models
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<Sale_promotion> Sale_promotion { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }
