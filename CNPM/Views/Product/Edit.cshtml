@@ -27,37 +27,37 @@
                     @Html.HiddenFor(model => model.ID)
 
                     <div class="form-group">
-                        Tên sản phẩm
+                        Tên sản phẩm:
                         @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
 
                     <div class="form-group">
-                        Tác giả
+                        Tác giả:
                         @Html.EditorFor(model => model.author, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
 
                     <div class="form-group">
-                        Năm xuất bản
+                        Năm xuất bản:
                         @Html.EditorFor(model => model.publishing_year, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
 
                     <div class="form-group">
-                        Nhà xuất bản
+                        Nhà xuất bản:
                         @Html.DropDownListFor(model => model.publisher, ViewBag.Publish as SelectList, "--Chọn NXB --", new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">
-                        Thể loại
+                        Thể loại:
                         @Html.DropDownListFor(model => model.category, ViewBag.Cate as SelectList, "--Chọn Thể loại --", new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">
-                        Giá bán
+                        Giá bán:
                         @Html.EditorFor(model => model.giaBia, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
 
                     <div class="form-group">
-                        Hình ảnh sản phẩm
+                        Hình ảnh sản phẩm:
                         <img src="@Url.Content(Session["imgPath"].ToString())" class="img-fluid" id="previewImg" />
                         <input type="file" name="UploadImage" class="form-control-file" onchange="ChangeImage(this, document.getElementById('previewImg'))" />
                         @Html.ValidationMessageFor(model => model.UploadImage, "", new { @class = "text-danger" })

@@ -12,7 +12,7 @@ namespace CNPM.Controllers.User
 {
     public class UsersController : Controller
     {
-        BookStoreEntities db = new BookStoreEntities();
+        BookStoreEntities1 db = new BookStoreEntities1();
         // GET: Users
         public ActionResult Index(string SortOrder, string currentFilter, string SearchString, int? page)
         {

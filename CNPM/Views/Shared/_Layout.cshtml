@@ -67,9 +67,9 @@
             @if (Session["NameUser"] != null)
             {
                 <div class="navbtn">
-                    <a href="@Url.Action("Index", "Home")" class="icon-link">
+                    <a href="@Url.Action("SignOut", "Login")" class="icon-link">
                         <button type="submit">
-                            <div class="text">Chào mừng bạn, @Session["NameUser"]</div>
+                            <div >Chào mừng bạn, @Session["NameUser"]</div>
                             <span class="sr-only">Tài khoản</span>
                         </button>
                     </a>

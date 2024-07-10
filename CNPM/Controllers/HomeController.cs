@@ -10,7 +10,7 @@ namespace CNPM.Controllers
 {
     public class HomeController : Controller
     {
-        BookStoreEntities database = new BookStoreEntities();
+        BookStoreEntities1 database = new BookStoreEntities1();
         public ActionResult Index()
         {
             return View(database.Product_title.ToList());

@@ -41,15 +41,16 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    @*<td>@Html.DisplayFor(modelItem => item.IDRe)</td>*@
-                    <td>@Html.DisplayFor(modelItem => item.name)</td>
-                    <td class="text-center"><img src="@Url.Content(item.ImagePro)" alt="Image" width="450" height="200" /></td>
-                    <td>
-                        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
-                    </td>
-                </tr>
+            <tr>
+                @*<td>@Html.DisplayFor(modelItem => item.IDRe)</td>*@
+                <td style="font-size:20px">@Html.DisplayFor(modelItem => item.name)</td>
+                <td class="text-center"><img src="@Url.Content(item.ImagePro)" alt="Image" width="150" height="200" /></td>
+
+                <td>
+                    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
             }
         </tbody>
     </table>
