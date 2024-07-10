@@ -17,12 +17,15 @@ namespace CNPM.Models
     using System.Linq;
     using System.Web;
 
+
     public partial class Product_title
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product_title()
         {
             this.invoice_detail = new HashSet<invoice_detail>();
+            this.Products = new HashSet<Product>();
+            this.ImagePro = "~/Content/Image/bbtmh.jpg";
         }
     
         public int ID { get; set; }
@@ -33,14 +36,14 @@ namespace CNPM.Models
         public string author { get; set; }
         public Nullable<double> giaBia { get; set; }
         public string ImagePro { get; set; }
-
         [NotMapped]
         public HttpPostedFileBase UploadImage { get; set; }
         public virtual Category Category1 { get; set; }
         public List<Product_title> ListProT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<invoice_detail> invoice_detail { get; set; }
-        public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
         public virtual Publisher Publisher1 { get; set; }
     }
 }

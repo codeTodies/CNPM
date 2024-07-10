@@ -35,7 +35,8 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDBook" Type="int" />
           <Property Name="quantity" Type="int" />
           <Property Name="giaBan" Type="float" />
           <Property Name="ngayThem" Type="date" />
@@ -164,15 +165,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product">
-          <End Role="Product_title" Type="Self.Product_title" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+        <Association Name="FK_product_productTitle">
+          <End Role="Product_title" Type="Self.Product_title" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product_title">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="IDBook" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -216,7 +217,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="invoice_Pro" EntitySet="invoice_Pro" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+          <AssociationSet Name="FK_product_productTitle" Association="Self.FK_product_productTitle">
             <End Role="Product_title" EntitySet="Product_title" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -265,12 +266,13 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDBook" Type="Int32" />
           <Property Name="quantity" Type="Int32" />
           <Property Name="giaBan" Type="Double" />
           <Property Name="ngayThem" Type="DateTime" Precision="0" />
           <Property Name="thanhTien" Type="Int32" />
-          <NavigationProperty Name="Product_title" Relationship="Self.FK_Product" FromRole="Product" ToRole="Product_title" />
+          <NavigationProperty Name="Product_title" Relationship="Self.FK_product_productTitle" FromRole="Product" ToRole="Product_title" />
         </EntityType>
         <EntityType Name="Product_title">
           <Key>
@@ -286,7 +288,7 @@
           <Property Name="ImagePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Cate" FromRole="Product_title" ToRole="Category" />
           <NavigationProperty Name="invoice_detail" Relationship="Self.FK_detail_pro" FromRole="Product_title" ToRole="invoice_detail" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product" FromRole="Product_title" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_product_productTitle" FromRole="Product_title" ToRole="Product" />
           <NavigationProperty Name="Publisher1" Relationship="Self.FK_Title_Publish" FromRole="Product_title" ToRole="Publisher" />
         </EntityType>
         <EntityType Name="Profit_revenue">
@@ -401,15 +403,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product">
-          <End Role="Product_title" Type="Self.Product_title" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+        <Association Name="FK_product_productTitle">
+          <End Role="Product_title" Type="Self.Product_title" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product_title">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="IDBook" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -453,7 +455,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="invoice_Pro" EntitySet="invoice_Pro" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+          <AssociationSet Name="FK_product_productTitle" Association="Self.FK_product_productTitle">
             <End Role="Product_title" EntitySet="Product_title" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
@@ -501,6 +503,7 @@
             <EntityTypeMapping TypeName="BookStoreModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDBook" ColumnName="IDBook" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="giaBan" ColumnName="giaBan" />
                 <ScalarProperty Name="ngayThem" ColumnName="ngayThem" />

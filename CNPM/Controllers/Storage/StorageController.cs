@@ -26,7 +26,7 @@ namespace CNPM.Controllers.Storage
                 SearchString = currentFilter;
             }
             ViewBag.CurrentFilter = SearchString;
-            var courses = from c in db.Products
+            var courses = from c in db.Product
                           select c;
             if (!string.IsNullOrEmpty(SearchString))
             {

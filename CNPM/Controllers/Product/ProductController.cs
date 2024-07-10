@@ -56,25 +56,29 @@ namespace CNPM.Controllers.Product
         {
             try
             {
-                if (pro.UploadImage != null)
+                if(ModelState.IsValid)
                 {
-                    string fileName = Path.GetFileNameWithoutExtension(pro.UploadImage.FileName);
-                    string extend = Path.GetExtension(pro.UploadImage.FileName);
-                    fileName = fileName + extend;
-                    pro.ImagePro = "~/Content/Image/" + fileName;
-                    pro.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/"), fileName));
-                    db.Product_title.Add(pro);
-                    CNPM.Models.Product product = new CNPM.Models.Product();
-                    product.ID=pro.ID;
-                    product.quantity = 0;
-                    db.Products.Add(product);
-                    db.SaveChanges();
-                }
-                return RedirectToAction("Index", "Home");
+                    if (pro.UploadImage != null)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(pro.UploadImage.FileName);
+                        string extend = Path.GetExtension(pro.UploadImage.FileName);
+                        fileName = fileName + extend;
+                        pro.ImagePro = "~/Content/Image/" + fileName;
+                        pro.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/"), fileName));
+                        db.Product_title.Add(pro);
+                        CNPM.Models.Product product = new CNPM.Models.Product();
+                        product.IDBook = pro.ID;
+                        product.quantity = 0;
+                        db.Product.Add(product);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }    
+                return View(pro);
             }
             catch
             {
-                return View();
+                return View(pro);
             }
         }
         public ActionResult SelectCate()

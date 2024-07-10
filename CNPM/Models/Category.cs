@@ -23,6 +23,7 @@ namespace CNPM.Models
         {
             this.Product_title = new HashSet<Product_title>();
         }
+    
         public int ID { get; set; }
         public string name { get; set; }
         [NotMapped]
