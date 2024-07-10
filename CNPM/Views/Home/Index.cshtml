@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/Style.css")" rel="stylesheet" type="text/css" />
 <body>
     <!-- Slideshow container/ Thanh quảng cáo -->
     <div class="slideshow-container">
@@ -88,29 +88,40 @@
     </script>
     <!-- Thanh lọc -->
     <div>
-        @Html.ActionLink("Loại sách", "Index", new { sortOrder = ViewBag.NameSortParam, page = ViewBag.PageNumber })
+        @Html.ActionLink("Theo giá tăng dần", "Index", new { SortOrder = "price_asc", page = ViewBag.PageNumber })
+
         |
-        @Html.ActionLink("Giá", "Index", new { sortOrder = ViewBag.PriceSortParam, page = ViewBag.PageNumber })
+
+        @Html.ActionLink("Theo giá giảm dần", "Index", new { SortOrder = "price_desc", page = ViewBag.PageNumber })
+
     </div>
 
     <!-- Sản phẩm -->
     <div class="container">
         <div class="row">
-            @foreach (var product in Model)
-            {
-                <div class="col-md-4">
-                    <div class="card">
-                        <a href="@Url.Action("Detail", "Product", new { id = product.ID })" class="card-link">
-                            <img src="@Url.Content(product.ImagePro)" class="card-img-top" alt="Product Image">
-                            <div class="card-body">
-                                <h5 class="card-title">@product.name</h5>
-                                <p class="card-text"> @product.giaBia đ</p>
-                            </div>
+            <div class="col-md-2">
+                @{ Html.RenderAction("CategoryPartial", "Home");}
+            </div>
+            <div class="col-md-10">
+                <!-- Sản phẩm -->
+                <div class="container">
+                    <div class="row">
+                        @foreach (var product in Model)
+                        {
+                            <div class="col-md-4 product-card" data-category="@product.Category1">
+                                <div class="card">
+                                    <a href="@Url.Action("Detail", "Product", new { id = product.ID })" class="card-link">
+                                        <img src="@Url.Content(product.ImagePro)" class="card-img-top" alt="Product Image" >
+                                        <div class="card-body">
+                                            <h5 class="card-title">@product.name</h5>
+                                            <p class="card-text"> @product.giaBia đ</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>}
                     </div>
                 </div>
-
-            }
-
+            </div>
         </div>
     </div>
     <!-- Số trang -->
@@ -136,5 +147,4 @@
         }
     </div>
 </body>
-    </body>
 

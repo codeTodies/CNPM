@@ -2,18 +2,11 @@
 @model PagedList.IPagedList<CNPM.Models.Publisher>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
     <h2 class="text-center">DANH SÁCH NHÀ XUẤT BẢN</h2>
 
     @using (Html.BeginForm("Index", "Publisher", FormMethod.Get, new { @class = "form-inline" }))
@@ -103,6 +96,3 @@
             </div>
         </div>
     </div>
-
-</body>
-</html>

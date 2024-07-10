@@ -19,7 +19,7 @@ namespace CNPM.Controllers.Login
 {
     public class LoginController : Controller
     {
-        BookStoreEntities1 db = new BookStoreEntities1();
+        BookStoreEntities db = new BookStoreEntities();
         // GET: Login
         public ActionResult Login()
         {
@@ -64,7 +64,36 @@ namespace CNPM.Controllers.Login
 
             return View(user);
         }
-        public ActionResult SignOut()
+        public ActionResult Admin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult LoginAdmin(Models.Staff staff)
+        {
+            var check = db.Staffs.Where(s => s.name == staff.name && s.password == staff.password).FirstOrDefault();
+            if (check == null)
+            {
+                ViewBag.ErrorInfos = "Sai thông tin đăng nhập";
+                return View("Admin");
+
+            }
+            else
+            {
+                db.Configuration.ValidateOnSaveEnabled = false;
+                Session["NameUser"] = staff.name;
+                Session["UserRole"] = staff.role;
+                Session["PasswordUser"] = staff.password;
+                return RedirectToAction("Index", "Users");
+            }
+        }
+        public ActionResult LogOutUser()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");
+        }
+
+    public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
             Session.Abandon();

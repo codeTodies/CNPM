@@ -21,5 +21,6 @@ namespace CNPM.Models
         public Nullable<System.DateTime> dateStart { get; set; }
         public Nullable<System.DateTime> dateEnd { get; set; }
         public Nullable<bool> status { get; set; }
+        public Nullable<int> score { get; set; }
     }
 }

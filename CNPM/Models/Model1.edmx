@@ -31,13 +31,16 @@
           <Property Name="ID_cus" Type="int" />
           <Property Name="addressDeli" Type="nvarchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'BookStore.dbo.Product' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Product">
-          <Property Name="ID" Type="int" />
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="quantity" Type="int" />
           <Property Name="giaBan" Type="float" />
-        </EntityType>-->
+          <Property Name="ngayThem" Type="date" />
+          <Property Name="thanhTien" Type="int" />
+        </EntityType>
         <EntityType Name="Product_title">
           <Key>
             <PropertyRef Name="ID" />
@@ -50,6 +53,16 @@ warning 6013: The table/view 'BookStore.dbo.Product' does not have a primary key
           <Property Name="author" Type="nvarchar" MaxLength="40" />
           <Property Name="giaBia" Type="float" />
           <Property Name="ImagePro" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Profit_revenue">
+          <Key>
+            <PropertyRef Name="years" />
+            <PropertyRef Name="months" />
+          </Key>
+          <Property Name="years" Type="int" Nullable="false" />
+          <Property Name="months" Type="int" Nullable="false" />
+          <Property Name="revenue" Type="int" />
+          <Property Name="profit" Type="int" />
         </EntityType>
         <EntityType Name="Publisher">
           <Key>
@@ -69,6 +82,7 @@ warning 6013: The table/view 'BookStore.dbo.Product' does not have a primary key
           <Property Name="dateStart" Type="date" />
           <Property Name="dateEnd" Type="date" />
           <Property Name="status" Type="bit" />
+          <Property Name="score" Type="int" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -80,6 +94,16 @@ warning 6013: The table/view 'BookStore.dbo.Product' does not have a primary key
           <Property Name="email" Type="nvarchar" MaxLength="30" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="role" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -140,9 +164,18 @@ warning 6013: The table/view 'BookStore.dbo.Product' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_Product" />-->
+        <Association Name="FK_Product">
+          <End Role="Product_title" Type="Self.Product_title" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product_title">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Title_Publish">
           <End Role="Publisher" Type="Self.Publisher" Multiplicity="0..1" />
           <End Role="Product_title" Type="Self.Product_title" Multiplicity="*" />
@@ -159,10 +192,13 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="invoice_detail" EntityType="Self.invoice_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="invoice_Pro" EntityType="Self.invoice_Pro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_title" EntityType="Self.Product_title" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profit_revenue" EntityType="Self.Profit_revenue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale_promotion" EntityType="Self.Sale_promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cate" Association="Self.FK_Cate">
             <End Role="Category" EntitySet="Category" />
@@ -179,6 +215,10 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
           <AssociationSet Name="FK_Invoice_Cus" Association="Self.FK_Invoice_Cus">
             <End Role="Users" EntitySet="Users" />
             <End Role="invoice_Pro" EntitySet="invoice_Pro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+            <End Role="Product_title" EntitySet="Product_title" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Title_Publish" Association="Self.FK_Title_Publish">
             <End Role="Publisher" EntitySet="Publisher" />
@@ -221,6 +261,17 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
           <NavigationProperty Name="invoice_detail" Relationship="Self.FK_detail_invoice" FromRole="invoice_Pro" ToRole="invoice_detail" />
           <NavigationProperty Name="User" Relationship="Self.FK_Invoice_Cus" FromRole="invoice_Pro" ToRole="Users" />
         </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="giaBan" Type="Double" />
+          <Property Name="ngayThem" Type="DateTime" Precision="0" />
+          <Property Name="thanhTien" Type="Int32" />
+          <NavigationProperty Name="Product_title" Relationship="Self.FK_Product" FromRole="Product" ToRole="Product_title" />
+        </EntityType>
         <EntityType Name="Product_title">
           <Key>
             <PropertyRef Name="ID" />
@@ -235,7 +286,18 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
           <Property Name="ImagePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Cate" FromRole="Product_title" ToRole="Category" />
           <NavigationProperty Name="invoice_detail" Relationship="Self.FK_detail_pro" FromRole="Product_title" ToRole="invoice_detail" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product" FromRole="Product_title" ToRole="Product" />
           <NavigationProperty Name="Publisher1" Relationship="Self.FK_Title_Publish" FromRole="Product_title" ToRole="Publisher" />
+        </EntityType>
+        <EntityType Name="Profit_revenue">
+          <Key>
+            <PropertyRef Name="years" />
+            <PropertyRef Name="months" />
+          </Key>
+          <Property Name="years" Type="Int32" Nullable="false" />
+          <Property Name="months" Type="Int32" Nullable="false" />
+          <Property Name="revenue" Type="Int32" />
+          <Property Name="profit" Type="Int32" />
         </EntityType>
         <EntityType Name="Publisher">
           <Key>
@@ -256,6 +318,7 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
           <Property Name="dateStart" Type="DateTime" Precision="0" />
           <Property Name="dateEnd" Type="DateTime" Precision="0" />
           <Property Name="status" Type="Boolean" />
+          <Property Name="score" Type="Int32" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -267,6 +330,16 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
           <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="role" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -328,6 +401,18 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product">
+          <End Role="Product_title" Type="Self.Product_title" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product_title">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Title_Publish">
           <End Role="Publisher" Type="Self.Publisher" Multiplicity="0..1" />
           <End Role="Product_title" Type="Self.Product_title" Multiplicity="*" />
@@ -340,14 +425,17 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BookStoreEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BookStoreEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="invoice_detail" EntityType="Self.invoice_detail" />
           <EntitySet Name="invoice_Pro" EntityType="Self.invoice_Pro" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Product_title" EntityType="Self.Product_title" />
+          <EntitySet Name="Profit_revenue" EntityType="Self.Profit_revenue" />
           <EntitySet Name="Publishers" EntityType="Self.Publisher" />
           <EntitySet Name="Sale_promotion" EntityType="Self.Sale_promotion" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_Cate" Association="Self.FK_Cate">
             <End Role="Category" EntitySet="Categories" />
@@ -365,6 +453,10 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
             <End Role="Users" EntitySet="Users" />
             <End Role="invoice_Pro" EntitySet="invoice_Pro" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+            <End Role="Product_title" EntitySet="Product_title" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
           <AssociationSet Name="FK_Title_Publish" Association="Self.FK_Title_Publish">
             <End Role="Publisher" EntitySet="Publishers" />
             <End Role="Product_title" EntitySet="Product_title" />
@@ -375,7 +467,7 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BookStoreModelStoreContainer" CdmEntityContainer="BookStoreEntities1">
+        <EntityContainerMapping StorageEntityContainer="BookStoreModelStoreContainer" CdmEntityContainer="BookStoreEntities">
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="BookStoreModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -405,6 +497,17 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="BookStoreModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="giaBan" ColumnName="giaBan" />
+                <ScalarProperty Name="ngayThem" ColumnName="ngayThem" />
+                <ScalarProperty Name="thanhTien" ColumnName="thanhTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Product_title">
             <EntityTypeMapping TypeName="BookStoreModel.Product_title">
               <MappingFragment StoreEntitySet="Product_title">
@@ -416,6 +519,16 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
                 <ScalarProperty Name="author" ColumnName="author" />
                 <ScalarProperty Name="giaBia" ColumnName="giaBia" />
                 <ScalarProperty Name="ImagePro" ColumnName="ImagePro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profit_revenue">
+            <EntityTypeMapping TypeName="BookStoreModel.Profit_revenue">
+              <MappingFragment StoreEntitySet="Profit_revenue">
+                <ScalarProperty Name="years" ColumnName="years" />
+                <ScalarProperty Name="months" ColumnName="months" />
+                <ScalarProperty Name="revenue" ColumnName="revenue" />
+                <ScalarProperty Name="profit" ColumnName="profit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -437,6 +550,7 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
                 <ScalarProperty Name="dateStart" ColumnName="dateStart" />
                 <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="score" ColumnName="score" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -449,6 +563,17 @@ error 6004: The table 'BookStore.dbo.Product' is referenced by a relationship, b
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BookStoreModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

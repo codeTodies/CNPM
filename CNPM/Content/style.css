@@ -51,8 +51,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
-    z-index: 1000;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    top: 0;
 }
 
     .topnav a {
@@ -60,17 +62,19 @@
         color: black;
         text-align: center;
         text-decoration: none;
-        font-size: 17px;
+        font-size: 15px;
     }
 
         .topnav a:hover {
             background-color: #cc0000;
             color: white;
+            border-radius: 25px;
         }
 
         .topnav a.active {
             background-color: #cc0000;
             color: white;
+            border-radius: 25px;
         }
 
     .topnav .navbtn {
@@ -78,15 +82,17 @@
         flex-direction: column;
         align-items: center;
         color: white;
-        font-size: 10px;
-        margin-left: 10px; /* Adjust spacing between navbtn and other elements */
+        font-size: 15px;
+        margin-left: 2px; /* Adjust spacing between navbtn and other elements */
     }
 
         .topnav .navbtn button {
             border-radius: 25px;
-            padding: 6px 10px;
+            padding: 5px 5px;
             background: #cc0000;
-            font-size: 10px;
+            font-size: 15px;
+            width: 40px;
+            height: 40px;
             border: none;
             cursor: pointer;
             color: white;
@@ -94,12 +100,13 @@
 
             .topnav .navbtn button:hover {
                 background: #b81a1a; /* Darker red */
+                border-radius: 25px;
             }
 
         .topnav .navbtn .name {
             margin-top: 5px;
-            color: black;
-            font-size: 14px;
+            color: white;
+            font-size: 15px;
         }
 
 /* Dropdown container */
@@ -124,6 +131,7 @@
 
     .dropbtn:hover {
         background-color: #b81a1a;
+        color: white;
     }
 
 /* Dropdown content (hidden by default) */
@@ -147,7 +155,7 @@
     }
 
         .dropdown-content a:hover {
-            background-color: #ffffff;
+            background-color: white;
             color: #ec3838;
         }
 
@@ -158,10 +166,10 @@
 
 
 /* Adjusted styles for smaller screens */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 100%) {
     .topnav {
         flex-direction: column;
-        align-items: flex-start;
+        position: fixed;
     }
 
         .topnav .dropdown {
@@ -219,7 +227,7 @@
     font-size: 17px;
     color: #808080;
     box-sizing: border-box;
-    width: 100%; /* Adjust width for search input */
+    width: 1000px; /* Adjust width for search input */
     border-radius: 15px;
 }
 
@@ -329,6 +337,7 @@
     position: relative; /* Ensure relative positioning for child elements */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
+    max-height: 600px;
     margin: auto;
     text-align: center;
     font-family: arial;
@@ -338,6 +347,7 @@
 
     .card img {
         width: 100%; /* Ensure the image takes full width of the card */
+        height: 100%;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
     }
@@ -368,3 +378,43 @@
     .card button:hover {
         opacity: 0.7;
     }
+
+.sidedmsp {
+    height: 100%; /* Full-height sidebar */
+    width: 200px; /* Fixed width */
+    position: fixed; /* Fixed position */
+    z-index: 1; /* Ensure it stays on top */
+    top: 0; /* Align to the top */
+    left: 0;
+    background-color: #ffffff; /* Dark background */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    padding-top: 50px; /* Top padding */
+}
+
+    .sidedmsp .button {
+        display: block;
+        background-color: #ec3838;
+        color: white;
+        padding: 12px;
+        width: 100%;
+        border: none;
+        outline: none;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .sidedmsp .button:hover {
+            background-color: #b81a1a; /* Darker red on hover */
+        }
+
+
+/* Style the tab content */
+.sidebttncontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border-left: none;
+    height: 300px;
+}

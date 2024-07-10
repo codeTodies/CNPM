@@ -14,7 +14,7 @@ namespace CNPM.Controllers.Product
 {
     public class ProductController : Controller
     {
-        BookStoreEntities1 db = new BookStoreEntities1();
+        BookStoreEntities db = new BookStoreEntities();
         public ActionResult Index(string SortOrder, string currentFilter, string SearchString, int? page)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(SortOrder) ? "Name_desc" : "";
@@ -64,6 +64,10 @@ namespace CNPM.Controllers.Product
                     pro.ImagePro = "~/Content/Image/" + fileName;
                     pro.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/"), fileName));
                     db.Product_title.Add(pro);
+                    CNPM.Models.Product product = new CNPM.Models.Product();
+                    product.ID=pro.ID;
+                    product.quantity = 0;
+                    db.Products.Add(product);
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index", "Home");

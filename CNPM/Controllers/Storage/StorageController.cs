@@ -8,9 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CNPM.Controllers.User
+namespace CNPM.Controllers.Storage
 {
-    public class UsersController : Controller
+    public class StorageController : Controller
     {
         BookStoreEntities db = new BookStoreEntities();
         // GET: Users
@@ -26,19 +26,19 @@ namespace CNPM.Controllers.User
                 SearchString = currentFilter;
             }
             ViewBag.CurrentFilter = SearchString;
-            var courses = from c in db.Users
+            var courses = from c in db.Products
                           select c;
             if (!string.IsNullOrEmpty(SearchString))
             {
-                courses = courses.Where(c => c.name.Contains(SearchString));
+                courses = courses.Where(c => c.Product_title.name.Contains(SearchString));
             }
             switch (SortOrder)
             {
                 case "Name_desc":
-                    courses = courses.OrderByDescending(c => c.name);
+                    courses = courses.OrderByDescending(c => c.Product_title.name);
                     break;
                 default:
-                    courses = courses.OrderBy(c => c.name);
+                    courses = courses.OrderBy(c => c.Product_title.name);
                     break;
             }
             int pageSize = 5;
@@ -56,11 +56,11 @@ namespace CNPM.Controllers.User
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(Models.User user)
+        public ActionResult Create(Models.Staff user)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                db.Staffs.Add(user);
                 if (db.SaveChanges() > 0)
                 {
                     TempData["nofi"] = "Thêm mới thành công";
@@ -78,7 +78,7 @@ namespace CNPM.Controllers.User
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.User user = db.Users.Find(id);
+            Models.Staff user = db.Staffs.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -90,7 +90,7 @@ namespace CNPM.Controllers.User
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(Models.User user)
+        public ActionResult Edit(Models.Staff user)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace CNPM.Controllers.User
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.User user = db.Users.Find(id);
+            Models.Staff user = db.Staffs.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -123,14 +123,13 @@ namespace CNPM.Controllers.User
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Models.User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            Models.Staff user = db.Staffs.Find(id);
+            db.Staffs.Remove(user);
             if (db.SaveChanges() > 0)
             {
                 TempData["nofi"] = "Xóa thành công";
             }
             return RedirectToAction("Index");
         }
-
     }
 }

@@ -16,7 +16,7 @@ namespace CNPM.Controllers.Categories
 {
     public class CategoriesController : Controller
     {
-        BookStoreEntities1  db = new BookStoreEntities1();
+        BookStoreEntities db = new BookStoreEntities();
         public ActionResult Index(string SortOrder, string currentFilter, string SearchString, int? page)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(SortOrder) ? "Name_desc" : "";
@@ -134,6 +134,11 @@ namespace CNPM.Controllers.Categories
             }
 
             return View();
+        }
+        public PartialViewResult CategoryPartial()
+        {
+            var cateList = db.Categories.ToList();
+            return PartialView(cateList);
         }
     }
 }
