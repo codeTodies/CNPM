@@ -33,14 +33,10 @@
         </EntityType>
         <EntityType Name="Product">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDBook" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDBook" Type="int" />
+          <Property Name="IDBook" Type="int" Nullable="false" />
           <Property Name="quantity" Type="int" />
-          <Property Name="giaBan" Type="float" />
-          <Property Name="ngayThem" Type="date" />
-          <Property Name="thanhTien" Type="int" />
         </EntityType>
         <EntityType Name="Product_title">
           <Key>
@@ -54,16 +50,6 @@
           <Property Name="author" Type="nvarchar" MaxLength="40" />
           <Property Name="giaBia" Type="float" />
           <Property Name="ImagePro" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="Profit_revenue">
-          <Key>
-            <PropertyRef Name="years" />
-            <PropertyRef Name="months" />
-          </Key>
-          <Property Name="years" Type="int" Nullable="false" />
-          <Property Name="months" Type="int" Nullable="false" />
-          <Property Name="revenue" Type="int" />
-          <Property Name="profit" Type="int" />
         </EntityType>
         <EntityType Name="Publisher">
           <Key>
@@ -166,8 +152,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_product_productTitle">
-          <End Role="Product_title" Type="Self.Product_title" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Role="Product_title" Type="Self.Product_title" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Product_title">
               <PropertyRef Name="ID" />
@@ -195,7 +181,6 @@
           <EntitySet Name="invoice_Pro" EntityType="Self.invoice_Pro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_title" EntityType="Self.Product_title" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Profit_revenue" EntityType="Self.Profit_revenue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale_promotion" EntityType="Self.Sale_promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
@@ -264,14 +249,10 @@
         </EntityType>
         <EntityType Name="Product">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDBook" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDBook" Type="Int32" />
+          <Property Name="IDBook" Type="Int32" Nullable="false" />
           <Property Name="quantity" Type="Int32" />
-          <Property Name="giaBan" Type="Double" />
-          <Property Name="ngayThem" Type="DateTime" Precision="0" />
-          <Property Name="thanhTien" Type="Int32" />
           <NavigationProperty Name="Product_title" Relationship="Self.FK_product_productTitle" FromRole="Product" ToRole="Product_title" />
         </EntityType>
         <EntityType Name="Product_title">
@@ -288,18 +269,8 @@
           <Property Name="ImagePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Cate" FromRole="Product_title" ToRole="Category" />
           <NavigationProperty Name="invoice_detail" Relationship="Self.FK_detail_pro" FromRole="Product_title" ToRole="invoice_detail" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_product_productTitle" FromRole="Product_title" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_product_productTitle" FromRole="Product_title" ToRole="Product" />
           <NavigationProperty Name="Publisher1" Relationship="Self.FK_Title_Publish" FromRole="Product_title" ToRole="Publisher" />
-        </EntityType>
-        <EntityType Name="Profit_revenue">
-          <Key>
-            <PropertyRef Name="years" />
-            <PropertyRef Name="months" />
-          </Key>
-          <Property Name="years" Type="Int32" Nullable="false" />
-          <Property Name="months" Type="Int32" Nullable="false" />
-          <Property Name="revenue" Type="Int32" />
-          <Property Name="profit" Type="Int32" />
         </EntityType>
         <EntityType Name="Publisher">
           <Key>
@@ -404,8 +375,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_product_productTitle">
-          <End Role="Product_title" Type="Self.Product_title" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Role="Product_title" Type="Self.Product_title" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Product_title">
               <PropertyRef Name="ID" />
@@ -433,7 +404,6 @@
           <EntitySet Name="invoice_Pro" EntityType="Self.invoice_Pro" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Product_title" EntityType="Self.Product_title" />
-          <EntitySet Name="Profit_revenue" EntityType="Self.Profit_revenue" />
           <EntitySet Name="Publishers" EntityType="Self.Publisher" />
           <EntitySet Name="Sale_promotion" EntityType="Self.Sale_promotion" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
@@ -502,12 +472,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="BookStoreModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDBook" ColumnName="IDBook" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="giaBan" ColumnName="giaBan" />
-                <ScalarProperty Name="ngayThem" ColumnName="ngayThem" />
-                <ScalarProperty Name="thanhTien" ColumnName="thanhTien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -522,16 +488,6 @@
                 <ScalarProperty Name="author" ColumnName="author" />
                 <ScalarProperty Name="giaBia" ColumnName="giaBia" />
                 <ScalarProperty Name="ImagePro" ColumnName="ImagePro" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Profit_revenue">
-            <EntityTypeMapping TypeName="BookStoreModel.Profit_revenue">
-              <MappingFragment StoreEntitySet="Profit_revenue">
-                <ScalarProperty Name="years" ColumnName="years" />
-                <ScalarProperty Name="months" ColumnName="months" />
-                <ScalarProperty Name="revenue" ColumnName="revenue" />
-                <ScalarProperty Name="profit" ColumnName="profit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

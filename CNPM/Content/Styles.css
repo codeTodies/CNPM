@@ -3,45 +3,44 @@
     display: inline-block;
     padding: 15px 30px;
     font-size: 18px;
-    background-color: #ec3838; /* Red */
-    color: #ffffff; /* White */
+    background-color: #ec3838;
+    color: #ffffff;
     border-radius: 20px;
     text-align: center;
-    text-decoration: none; /* Remove default underline for links */
+    text-decoration: none;
+    transition: background-color 0.3s;
 }
 
     .btn-login:hover {
-        background-color: #cc0000; /* Darker red on hover */
+        background-color: #cc0000;
     }
 
 /* Table */
 .table-Login {
-    width: 50%;
+    width: 80%;
+    max-width: 600px;
     border: solid black;
     align-content: center;
     background-color: #ffffff;
     justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto;
     text-decoration: none;
+    border-collapse: collapse;
 }
 
-.td-box {
-    text-align: center;
-}
+    .table-Login td, .table-Login th {
+        padding: 10px;
+        border: 1px solid black;
+        text-align: center;
+    }
 
 .td-pick {
-    border: solid black;
-    text-align: center;
     background-color: #ec3838;
     color: aliceblue;
 }
 
 .td-unpick {
-    border: solid black;
-    text-align: center;
     color: black;
-    text-decoration: none;
 }
 
 /* Top navbar */
@@ -55,26 +54,24 @@
     width: 100%;
     z-index: 2;
     top: 0;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
     .topnav a {
-        display: block;
-        color: black;
+        color: white;
         text-align: center;
         text-decoration: none;
         font-size: 15px;
+        padding: 8px 16px;
+        border-radius: 25px;
+        transition: background-color 0.3s, color 0.3s;
     }
 
-        .topnav a:hover {
-            background-color: #cc0000;
-            color: white;
-            border-radius: 25px;
-        }
-
+        .topnav a:hover,
         .topnav a.active {
             background-color: #cc0000;
             color: white;
-            border-radius: 25px;
         }
 
     .topnav .navbtn {
@@ -83,12 +80,12 @@
         align-items: center;
         color: white;
         font-size: 15px;
-        margin-left: 2px; /* Adjust spacing between navbtn and other elements */
+        margin: 0 10px;
     }
 
         .topnav .navbtn button {
             border-radius: 25px;
-            padding: 5px 5px;
+            padding: 5px;
             background: #cc0000;
             font-size: 15px;
             width: 40px;
@@ -96,11 +93,11 @@
             border: none;
             cursor: pointer;
             color: white;
+            transition: background 0.3s;
         }
 
             .topnav .navbtn button:hover {
-                background: #b81a1a; /* Darker red */
-                border-radius: 25px;
+                background: #b81a1a;
             }
 
         .topnav .navbtn .name {
@@ -115,43 +112,39 @@
     display: inline-block;
 }
 
-/* Dropdown button */
 .dropbtn {
     font-size: 16px;
     border: none;
     outline: none;
     color: white;
-    padding: 16px 16px;
+    padding: 16px;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
     cursor: pointer;
-    width: 100%;
+    transition: background-color 0.3s, color 0.3s;
 }
 
     .dropbtn:hover {
         background-color: #b81a1a;
-        color: white;
     }
 
-/* Dropdown content (hidden by default) */
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #ec3838;
     color: white;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1001; /* Higher z-index than other elements */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
 }
 
-    /* Links inside the dropdown */
     .dropdown-content a {
         color: black;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
-        text-align: left;
+        transition: background-color 0.3s, color 0.3s;
     }
 
         .dropdown-content a:hover {
@@ -159,57 +152,43 @@
             color: #ec3838;
         }
 
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-
 /* Adjusted styles for smaller screens */
-@media screen and (max-width: 100%) {
+@media screen and (max-width: 768px) {
     .topnav {
         flex-direction: column;
-        position: fixed;
+        align-items: flex-start;
+        padding: 10px;
     }
 
-        .topnav .dropdown {
-            position: static; /* Reset position for smaller screens */
-            display: block; /* Ensure dropdown occupies full width */
-            width: 100%;
-            margin: 0;
-            padding: 14px;
-            border-radius: 15px;
-        }
-
-            .topnav .dropdown .dropbtn {
-                margin-bottom: 10px; /* Optional: Space between dropdown and other items */
-            }
-
-        .topnav .dropdown-content {
-            position: static; /* Reset position for smaller screens */
-            width: 100%;
-            margin: 0;
-            padding: 14px;
-            border-radius: 15px;
-            z-index: 1001;
-        }
-
-        .topnav .navbtn {
-            margin-left: 0; /* Adjust spacing for smaller screens */
-        }
-
-        .topnav .navbtn, .topnav a, .topnav input[type=text], .topnav .search-container button {
+        .topnav .navbtn,
+        .topnav a,
+        .topnav input[type=text],
+        .topnav .search-container button {
             float: none;
             display: block;
             text-align: left;
             width: 100%;
             margin: 0;
-            padding: 14px;
-            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .topnav .search-container {
+            margin-top: 8px;
+            width: 100%;
         }
 
         .topnav input[type=text] {
-            border: 1px solid #ec3838;
+            width: calc(100% - 50px);
+        }
+
+        .topnav .search-container button {
+            position: absolute;
+            right: 10px;
+            top: 10px;
         }
 }
 
@@ -218,35 +197,40 @@
     display: flex;
     align-items: center;
     position: relative;
-    margin-top: 8px;
 }
 
 .topnav input[type=text] {
     padding: 6px 40px 6px 6px;
-    border: none;
+    border: 1px solid #ec3838;
     font-size: 17px;
     color: #808080;
     box-sizing: border-box;
-    width: 1000px; /* Adjust width for search input */
+    width: 400px;
     border-radius: 15px;
+    transition: width 0.3s;
 }
+
+    .topnav input[type=text]:focus {
+        width: 500px;
+    }
 
 .topnav .search-container button {
     position: absolute;
-    right: 5px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     border-radius: 15px;
     padding: 6px 10px;
     background: #cc0000;
-    font-size: 10px;
+    font-size: 14px;
     border: none;
     cursor: pointer;
     color: white;
+    transition: background 0.3s;
 }
 
     .topnav .search-container button:hover {
-        background: #b81a1a; /* Darker red */
+        background: #b81a1a;
     }
 
 /* Slideshow container */
@@ -255,15 +239,12 @@
     position: relative;
     margin: auto;
     overflow: hidden;
-    z-index: 1;
 }
 
-/* Hide the images by default */
 .mySlides {
     display: none;
 }
 
-/* Next & previous buttons */
 .prev, .next {
     cursor: pointer;
     position: absolute;
@@ -274,23 +255,20 @@
     color: white;
     font-weight: bold;
     font-size: 18px;
-    transition: 0.6s ease;
+    transition: background-color 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
 }
 
-/* Position the "next button" to the right */
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
 }
 
-    /* On hover, add a black background color with a little bit see-through */
     .prev:hover, .next:hover {
-        background-color: rgba(0,0,0,0.8);
+        background-color: rgba(0, 0, 0, 0.8);
     }
 
-/* Caption text */
 .text {
     color: #f2f2f2;
     font-size: 15px;
@@ -301,7 +279,6 @@
     text-align: center;
 }
 
-/* The dots/bullets/indicators */
 .dot {
     cursor: pointer;
     height: 15px;
@@ -317,7 +294,6 @@
         background-color: #717171;
     }
 
-/* Fading animation */
 .fade {
     animation-name: fade;
     animation-duration: 1.5s;
@@ -332,34 +308,33 @@
         opacity: 1
     }
 }
-/*product card*/
+
+/* Product card */
 .card {
-    position: relative; /* Ensure relative positioning for child elements */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 300px;
-    max-height: 600px;
-    margin: auto;
+    margin: 20px auto;
     text-align: center;
-    font-family: arial;
+    font-family: Arial, sans-serif;
     border-radius: 15px;
-    overflow: hidden; /* Ensure content doesn't overflow */
+    overflow: hidden;
 }
 
     .card img {
-        width: 100%; /* Ensure the image takes full width of the card */
-        height: 100%;
+        width: 100%;
+        height: auto;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
     }
 
 .card-content {
-    padding: 20px; /* Padding around the content */
+    padding: 20px;
 }
 
 .price {
     color: #ec3838;
     font-size: 22px;
-    margin-top: 10px; /* Add margin to separate price from other content */
+    margin-top: 10px;
 }
 
 .card button {
@@ -372,23 +347,25 @@
     cursor: pointer;
     width: 100%;
     font-size: 18px;
-    margin-top: 15px; /* Add margin between price and button */
+    margin-top: 15px;
+    transition: opacity 0.3s;
 }
 
     .card button:hover {
         opacity: 0.7;
     }
 
+/* Sidebar */
 .sidedmsp {
-    height: 100%; /* Full-height sidebar */
-    width: 200px; /* Fixed width */
-    position: fixed; /* Fixed position */
-    z-index: 1; /* Ensure it stays on top */
-    top: 0; /* Align to the top */
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
     left: 0;
-    background-color: #ffffff; /* Dark background */
-    overflow-x: hidden; /* Hide horizontal scrollbar */
-    padding-top: 50px; /* Top padding */
+    background-color: #ffffff;
+    overflow-x: hidden;
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
     .sidedmsp .button {
@@ -405,16 +382,82 @@
     }
 
         .sidedmsp .button:hover {
-            background-color: #b81a1a; /* Darker red on hover */
+            background-color: #b81a1a;
         }
 
-
-/* Style the tab content */
+/* Sidebar content */
 .sidebttncontent {
-    float: left;
-    padding: 0px 12px;
+    margin-left: 220px;
+    padding: 20px;
     border: 1px solid #ccc;
-    width: 70%;
     border-left: none;
-    height: 300px;
+    height: auto;
+    min-height: 300px;
+    border-radius: 15px;
 }
+
+/* Additional styles for better spacing */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .sidebttncontent {
+        margin-left: 0;
+    }
+}
+
+/*Giỏ hàng*/
+/* Cart Button Styling */
+.cart-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #ec3838; /* Main color */
+    color: white;
+    font-size: 18px;
+    border-radius: 25px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+    .cart-btn:hover {
+        background-color: #cc0000; /* Darker red */
+        transform: scale(1.05);
+    }
+
+    .cart-btn i {
+        font-size: 24px;
+        margin-right: 8px;
+    }
+
+
+.navbtn .name {
+    margin-top: 5px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+}
+
+/* General Styles */
+.navbtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px; /* Adjust spacing between navbtn elements */
+}
+

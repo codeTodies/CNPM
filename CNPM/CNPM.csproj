@@ -144,14 +144,15 @@
     <Compile Include="Controllers\Staff\StaffController.cs" />
     <Compile Include="Controllers\Storage\StorageController.cs" />
     <Compile Include="Controllers\User\UsersController.cs" />
+    <Compile Include="Controllers\Voucher\VoucherController.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CompositeModel.cs" />
     <Compile Include="Models\invoice_detail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -177,9 +178,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product_title.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Profit_revenue.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Publisher.cs">
@@ -213,7 +211,8 @@
     <Content Include="Content\Image\bbtmh.jpg" />
     <Content Include="Content\login.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="Content\Style.css" />
+    <Content Include="Content\personal.css" />
+    <Content Include="Content\Styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -294,10 +293,23 @@
     <Content Include="Views\Home\CategoryPartial.cshtml" />
     <Content Include="Views\Layout\Layout_Storage.cshtml" />
     <Content Include="Views\Storage\Index.cshtml" />
+    <Content Include="Views\Storage\Create.cshtml" />
+    <Content Include="Views\ShoppingCart\BagCart.cshtml" />
+    <Content Include="Views\ShoppingCart\ShowCart.cshtml" />
+    <Content Include="Views\ShoppingCart\EmptyCart.cshtml" />
+    <Content Include="Views\ShoppingCart\ThanhToan.cshtml" />
+    <Content Include="Views\ShoppingCart\InfoUser.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
+    <Content Include="Views\Users\PersonalInfo.cshtml" />
+    <Content Include="Views\ShoppingCart\PersonalCart.cshtml" />
+    <Content Include="Views\ShoppingCart\detailOrder.cshtml" />
+    <Content Include="Views\Users\EditPersonal.cshtml" />
+    <Content Include="Views\Layout\Layout_Voucher.cshtml" />
+    <Content Include="Views\Voucher\Index.cshtml" />
+    <Content Include="Views\Voucher\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

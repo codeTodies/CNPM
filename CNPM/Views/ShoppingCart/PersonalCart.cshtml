@@ -1,0 +1,26 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<CNPM.Models.invoice_detail>
+@{
+    Layout = null;
+}
+<link href="@Url.Content("~/Content/personal.css")" rel="stylesheet" type="text/css" />
+<h2>Quản lý đơn hàng</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã đơn hàng</th>
+            <th>Ngày đặt</th>
+            <th>Chi tiết</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => order.invoice_Pro.ID)</td>
+                <td>@Html.DisplayFor(modelItem => order.invoice_Pro.dateOrder)</td>
+                <td><a href="@Url.Action("detailOrder", "ShoppingCart", new { id = order.invoice_Pro.ID })">Chi tiết</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

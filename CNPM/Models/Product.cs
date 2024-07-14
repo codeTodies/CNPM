@@ -14,12 +14,8 @@ namespace CNPM.Models
     
     public partial class Product
     {
-        public int ID { get; set; }
-        public Nullable<int> IDBook { get; set; }
+        public int IDBook { get; set; }
         public Nullable<int> quantity { get; set; }
-        public Nullable<double> giaBan { get; set; }
-        public Nullable<System.DateTime> ngayThem { get; set; }
-        public Nullable<int> thanhTien { get; set; }
     
         public virtual Product_title Product_title { get; set; }
     }

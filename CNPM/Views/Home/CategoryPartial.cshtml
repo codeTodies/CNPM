@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<CNPM.Models.Category>
 @{
-    <div class="sidedmsp">
+    <div class="sidedmsp" style="margin-top:2.5rem">
         @foreach (var item in Model)
         {
             @Html.ActionLink(item.name, "Index", "Home", new { category = item.ID }, new { @class = "button" })

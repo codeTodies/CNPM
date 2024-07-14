@@ -39,6 +39,7 @@ namespace CNPM.Controllers.Login
             else
             {
                 db.Configuration.ValidateOnSaveEnabled = false;
+                Session["IdUser"] = check.ID;
                 Session["NameUser"] = user.name;
                 Session["UserRole"] = "User";
                 Session["PasswordUser"] = user.password;
@@ -82,9 +83,16 @@ namespace CNPM.Controllers.Login
             {
                 db.Configuration.ValidateOnSaveEnabled = false;
                 Session["NameUser"] = staff.name;
-                Session["UserRole"] = staff.role;
+                Session["UserRole"] = check.role;
                 Session["PasswordUser"] = staff.password;
-                return RedirectToAction("Index", "Users");
+                if(check.role=="Nhân viên kho")
+                {
+                    return RedirectToAction("Index", "Storage");
+                }   
+                else
+                {
+                    return RedirectToAction("Index", "Users");
+                }    
             }
         }
         public ActionResult LogOutUser()

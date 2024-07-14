@@ -4,31 +4,54 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nhà sách ABC</title>
-    <link href="@Url.Content("~/Content/Style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Styles.css")" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
+<style>
+    /* Account button styling */
+    .account-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #ec3838; /* Main color */
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        text-align: center;
+        text-decoration: none;
+    }
+
+        .account-btn:hover {
+            background-color: #cc0000; /* Darker red */
+            transform: scale(1.05);
+        }
+
+    /* Account greeting text */
+    .account-greeting {
+        font-size: 14px;
+        margin-right: 10px;
+    }
+
+    .navbtn .name {
+        margin-top: 5px;
+        color: white;
+        font-size: 15px;
+        text-align: center;
+    }
+</style>
 <body>
     <header>
         <div class="topnav">
-            <div class="dropdown">
-                <button class="dropbtn">
-                    <a href="@Url.Action("Index", "Product")">Danh mục sản phẩm</a>
-                </button>
-                <div class="dropdown-content">
-                    <a href="#">Sách nước ngoài</a>
-                    <a href="#">Sách trong nước</a>
-                    <a href="#">Sách giáo khoa</a>
-                    <a href="#">Sách thiếu nhi</a>
-                    <a href="#">Dụng cụ học tập</a>
-                </div>
-            </div>
             <div class="navbtn">
                 <a href="@Url.Action("Index", "Home")" class="icon-link">
                     <button type="submit">
                         <i class="fa-solid fa-house"></i>
-                        <span class="sr-only">Thông báo</span>
+                        <span class="sr-only">Home</span>
                     </button>
                 </a>
                 <div class="name">Trang chủ</div>
@@ -36,30 +59,26 @@
 
             <div class="search-container">
                 @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline" }))
-                 {
-                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
-                    <button type="submit" id="search-btn" > <i class="fa-solid fa-magnifying-glass"></i></button>
-                 }
-            </div>
-
-            <div class="navbtn">
-                <a href="@Url.Action("Notify", "Home")" class="icon-link">
-                    <button type="submit">
-                        <i class="fa-solid fa-bell"></i>
+                {
+                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Tìm kiếm..." })
+                    <button type="submit" id="search-btn" class="btn btn-primary">
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
-                </a>
-                <div class="name">Thông báo</div>
+                }
             </div>
 
             <div class="navbtn">
-                <a href="@Url.Action("Cart", "Home")" class="icon-link">
-                    <button type="submit">
+                <a href="@Url.Action("ShowCart", "ShoppingCart")" class="icon-link">
+                    <button type="button" class="cart-btn">
                         <i class="fa-solid fa-cart-shopping"></i>
+                        @Html.Action("BagCart","ShoppingCart")
                         <span class="sr-only">Giỏ hàng</span>
                     </button>
                 </a>
                 <div class="name">Giỏ hàng</div>
             </div>
+
+
 
             @if (Session["NameUser"] == null)
             {
@@ -73,16 +92,13 @@
                     <div class="name">Tài khoản</div>
                 </div>
             }
-            @if (Session["NameUser"] != null)
+            else
             {
                 <div class="navbtn">
-                    <a href="@Url.Action("SignOut", "Login")" class="icon-link">
-                        <button type="submit">
-                            <div>Chào mừng bạn, @Session["NameUser"]</div>
-                            <span class="sr-only">Tài khoản</span>
-                        </button>
+                    <a href="@Url.Action("PersonalInfo", "Users", new { id = (int)Session["IdUser"] })" class="icon-link">
+                       <div>Chào mừng bạn, @Session["NameUser"]</div>
+                       <span class="sr-only">Tài khoản</span>
                     </a>
-                    <div class="name">Tài khoản</div>
                 </div>
             }
         </div>

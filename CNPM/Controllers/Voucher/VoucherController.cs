@@ -10,9 +10,9 @@ using System.Web.Mvc;
 using PagedList;
 using System.Net;
 
-namespace CNPM.Controllers.Product
+namespace CNPM.Controllers.Voucher
 {
-    public class ProductController : Controller
+    public class VoucherController : Controller
     {
         BookStoreEntities db = new BookStoreEntities();
         public ActionResult Index(string SortOrder, string currentFilter, string SearchString, int? page)
@@ -56,7 +56,7 @@ namespace CNPM.Controllers.Product
         {
             try
             {
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     if (pro.UploadImage != null)
                     {
@@ -73,7 +73,7 @@ namespace CNPM.Controllers.Product
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
-                }    
+                }
                 return View(pro);
             }
             catch
@@ -164,49 +164,6 @@ namespace CNPM.Controllers.Product
                         return RedirectToAction("Index");
                     }
                 }
-            }
-            return View();
-        }
-
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product_title product = db.Product_title.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
-
-        // POST: Regions/Delete/5
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            var pro = db.Product.Where(s => s.IDBook == id).FirstOrDefault();
-            var product = db.Product_title.Where(s => s.ID == id).FirstOrDefault();
-            if (product == null || pro == null)
-            {
-                return HttpNotFound();
-            }
-            string curImg = Request.MapPath(product.ImagePro);
-            db.Entry(pro).State = EntityState.Deleted;
-            db.Entry(product).State = EntityState.Deleted;
-            if (db.SaveChanges() > 0)
-            {
-                if (System.IO.File.Exists(curImg))
-                {
-                    System.IO.File.Delete(curImg);
-                }
-                TempData["nofi"] = "Xóa thành công";
-                return RedirectToAction("Index");
             }
             return View();
         }

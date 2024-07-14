@@ -47,89 +47,39 @@ namespace CNPM.Controllers.Storage
 
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            return View(db.Product.Where(s => s.IDBook == id).FirstOrDefault());
         }
 
         // POST: AdminUsers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(Models.Staff user)
+        public ActionResult Create(int id, FormCollection form)
         {
             if (ModelState.IsValid)
             {
-                db.Staffs.Add(user);
-                if (db.SaveChanges() > 0)
+                // Lấy đối tượng từ cơ sở dữ liệu
+                var pro = db.Product.Find(id);
+
+                if (pro != null)
                 {
-                    TempData["nofi"] = "Thêm mới thành công";
-                    ModelState.Clear();
+                    // Cập nhật thuộc tính quantity
+                    pro.quantity += int.Parse(form["Quantity"]);
+
+                    // Đánh dấu đối tượng là đã được sửa đổi
+                    db.Entry(pro).Property(p => p.quantity).IsModified = true;
+
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
             }
 
-            return View(user);
-        }
-
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Models.Staff user = db.Staffs.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: AdminUsers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public ActionResult Edit(Models.Staff user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                if (db.SaveChanges() > 0)
-                {
-                    TempData["nofi"] = "Cập nhật thành công";
-                }
-                return RedirectToAction("Index");
-            }
-            return View(user);
-        }
-
-        // GET: AdminUsers/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Models.Staff user = db.Staffs.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        // POST: AdminUsers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Models.Staff user = db.Staffs.Find(id);
-            db.Staffs.Remove(user);
-            if (db.SaveChanges() > 0)
-            {
-                TempData["nofi"] = "Xóa thành công";
-            }
             return RedirectToAction("Index");
         }
+
     }
 }

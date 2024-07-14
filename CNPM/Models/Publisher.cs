@@ -16,7 +16,7 @@ namespace CNPM.Models
     using System.Drawing;
     using System.Linq;
     using System.Web;
-    
+
     public partial class Publisher
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,6 +27,7 @@ namespace CNPM.Models
     
         public int ID { get; set; }
         public string name { get; set; }
+
         [NotMapped]
         public List<Publisher> listPublisher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1,0 +1,132 @@
+﻿@model CNPM.Models.Cart
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int orderTotal = 0;
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="~/Content/Styles.css" rel="stylesheet" />
+<style>
+    /* Container */
+    .container {
+        padding: 20px;
+        max-width: 800px;
+        margin: auto;
+        margin-top: 2rem;
+    }
+
+    /* Customer info */
+    .customer-info p {
+        font-size: 16px;
+        margin: 5px 0;
+    }
+
+    /* Table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: black;
+        }
+
+    /* Payment methods */
+    .payment-methods {
+        margin: 20px 0;
+    }
+
+    .form-group {
+        margin: 10px 0;
+    }
+
+        .form-group label {
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+    /* Order button */
+    .btn-order {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #ec3838;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        border: none;
+    }
+
+        .btn-order:hover {
+            background-color: #cc0000;
+        }
+
+    .order-total {
+        margin-top: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: right;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+    }
+
+</style>
+<div class="container">
+    @{ Html.RenderAction("InfoUser", "ShoppingCart");}
+    <h2>Giỏ hàng của bạn</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                int total = item.quantity * (int)item.product.Product_title.giaBia.Value;
+                orderTotal += total;
+                <tr>
+                    <td>@Html.DisplayFor(model => item.product.Product_title.name)</td>
+                    <td><img src="@Url.Content(item.product.Product_title.ImagePro)" height="50" width="50" /></td>
+                    <td>@item.quantity</td>
+                    <td>@Html.DisplayFor(model => item.product.Product_title.giaBia)</td>
+                    <td>@total</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="order-total">
+        <h3>Tổng giá trị đơn hàng: @orderTotal</h3>
+    </div>
+    @using (Html.BeginForm("CheckOut", "ShoppingCart"))
+    {
+        <table class="table" style="border-collapse:separate;border-spacing:5px;">
+            <tr>
+                <td>Địa chỉ giao hàng:</td>
+                <td><input type="text" name="Address" required /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="CheckOut" class="btn btn-success" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>

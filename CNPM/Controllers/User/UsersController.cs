@@ -132,5 +132,46 @@ namespace CNPM.Controllers.User
             return RedirectToAction("Index");
         }
 
+        public ActionResult PersonalInfo(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Models.User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+        public ActionResult EditPersonal(int ?id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Models.User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult EditPersonal(Models.User user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                if (db.SaveChanges() > 0)
+                {
+                    TempData["nofi"] = "Cập nhật thành công";
+                }
+                return RedirectToAction("PersonalInfo", new { id = user.ID });
+            }
+            return View(user);
+        }
     }
 }

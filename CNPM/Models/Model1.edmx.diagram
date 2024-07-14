@@ -4,17 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9a3ff0de185b4a34997cca301fc85a0b" Name="Diagram1">
+      <Diagram DiagramId="836a7127115d4d99b73dce9f9e517f00" Name="Diagram1">
         <EntityTypeShape EntityType="BookStoreModel.Category" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BookStoreModel.invoice_detail" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="BookStoreModel.invoice_Pro" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.Product" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.Product" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BookStoreModel.Product_title" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.Profit_revenue" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BookStoreModel.Publisher" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.Sale_promotion" Width="1.5" PointX="7.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.Staff" Width="1.5" PointX="7.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.sysdiagram" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.Sale_promotion" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.Staff" Width="1.5" PointX="7.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStoreModel.sysdiagram" Width="1.5" PointX="7.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BookStoreModel.User" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
         <AssociationConnector Association="BookStoreModel.FK_Cate" ManuallyRouted="false" />
         <AssociationConnector Association="BookStoreModel.FK_detail_invoice" ManuallyRouted="false" />

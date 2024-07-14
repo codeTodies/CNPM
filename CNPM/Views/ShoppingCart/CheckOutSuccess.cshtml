@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "ThanhToanSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/Styles.css")" rel="stylesheet" type="text/css" />
+<style>
+    .stf{
+        margin-top:6rem;
+    }
+</style>
+<body>
+    <div class="stf" style="text-align: center">
+        <h1 style="color: #b81a1a">Bạn đã thanh toán thành công</h1>
+        <h3 style="color: #b81a1a">Cảm ơn đã mua hàng</h3>
+        <button class="btn-login">
+            <a href="@Url.Action("Index", "Home")" style="text-decoration:none">
+                <i class="fa-solid fa-house"></i>
+                Trở về trang chủ
+            </a>
+        </button>
+    </div>
+</body>
+
+

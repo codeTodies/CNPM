@@ -30,7 +30,6 @@ namespace CNPM.Models
         public virtual DbSet<invoice_Pro> invoice_Pro { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Product_title> Product_title { get; set; }
-        public virtual DbSet<Profit_revenue> Profit_revenue { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<Sale_promotion> Sale_promotion { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
