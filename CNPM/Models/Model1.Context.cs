@@ -24,7 +24,7 @@ namespace CNPM.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<invoice_detail> invoice_detail { get; set; }
         public virtual DbSet<invoice_Pro> invoice_Pro { get; set; }

@@ -117,7 +117,7 @@
                         }
                         <h3>Tổng giá trị đơn hàng: @orderTotal VND</h3>
                     </div>
-                    <a href="@Url.Action("ThanhToan", "ShoppingCart")" class="btn-checkout"> Thanh toán</a>
+                    <a href="@Url.Action("ThanhToan", "ShoppingCart",new { tongtien = orderTotal })" class="btn-checkout"> Thanh toán</a>
                 </td>
             </tr>
         </tfoot>

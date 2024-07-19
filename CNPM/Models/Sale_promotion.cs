@@ -20,7 +20,6 @@ namespace CNPM.Models
         public string description { get; set; }
         public Nullable<System.DateTime> dateStart { get; set; }
         public Nullable<System.DateTime> dateEnd { get; set; }
-        public Nullable<bool> status { get; set; }
-        public Nullable<int> score { get; set; }
+        public Nullable<int> percentage { get; set; }
     }
 }

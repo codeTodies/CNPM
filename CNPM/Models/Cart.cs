@@ -46,7 +46,7 @@ namespace CNPM.Models
             var total = items.Sum(s => s.quantity * s.product.Product_title.giaBia);
             if (voucher != null && total >= voucher.condition)
             {
-                total -= total * (voucher.score / 100);
+                total -= total * (voucher.percentage / 100);
             }
             return (decimal)total;
         }

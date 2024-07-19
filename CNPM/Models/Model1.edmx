@@ -30,6 +30,7 @@
           <Property Name="dateOrder" Type="date" />
           <Property Name="ID_cus" Type="int" />
           <Property Name="addressDeli" Type="nvarchar(max)" />
+          <Property Name="tongTien" Type="money" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -68,8 +69,7 @@
           <Property Name="description" Type="nvarchar" MaxLength="60" />
           <Property Name="dateStart" Type="date" />
           <Property Name="dateEnd" Type="date" />
-          <Property Name="status" Type="bit" />
-          <Property Name="score" Type="int" />
+          <Property Name="percentage" Type="int" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -101,7 +101,6 @@
           <Property Name="password" Type="varchar" MaxLength="16" />
           <Property Name="email" Type="nvarchar" MaxLength="30" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
-          <Property Name="score" Type="int" />
         </EntityType>
         <Association Name="FK_Cate">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -244,6 +243,7 @@
           <Property Name="dateOrder" Type="DateTime" Precision="0" />
           <Property Name="ID_cus" Type="Int32" />
           <Property Name="addressDeli" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tongTien" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="invoice_detail" Relationship="Self.FK_detail_invoice" FromRole="invoice_Pro" ToRole="invoice_detail" />
           <NavigationProperty Name="User" Relationship="Self.FK_Invoice_Cus" FromRole="invoice_Pro" ToRole="Users" />
         </EntityType>
@@ -290,8 +290,7 @@
           <Property Name="description" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="dateStart" Type="DateTime" Precision="0" />
           <Property Name="dateEnd" Type="DateTime" Precision="0" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="score" Type="Int32" />
+          <Property Name="percentage" Type="Int32" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -323,7 +322,6 @@
           <Property Name="password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="score" Type="Int32" />
           <NavigationProperty Name="invoice_Pro" Relationship="Self.FK_Invoice_Cus" FromRole="Users" ToRole="invoice_Pro" />
         </EntityType>
         <Association Name="FK_Cate">
@@ -466,6 +464,7 @@
                 <ScalarProperty Name="dateOrder" ColumnName="dateOrder" />
                 <ScalarProperty Name="ID_cus" ColumnName="ID_cus" />
                 <ScalarProperty Name="addressDeli" ColumnName="addressDeli" />
+                <ScalarProperty Name="tongTien" ColumnName="tongTien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -508,8 +507,7 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="dateStart" ColumnName="dateStart" />
                 <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -544,7 +542,6 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="score" ColumnName="score" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

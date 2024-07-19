@@ -79,7 +79,7 @@ namespace CNPM.Controllers.ShoppingCart
             var check = database.Sale_promotion.Where(s=>s.ID == voucherCode).FirstOrDefault();
             if (check != null && check.dateEnd > DateTime.Now && check.condition < total)
             {
-                Session["Voucher"] = check.score;
+                Session["Voucher"] = check.percentage;
                 TempData["VoucherSuccess"] = "Áp dụng voucher thành công";
             }
             else
@@ -105,8 +105,9 @@ namespace CNPM.Controllers.ShoppingCart
             ViewBag.QuantityCart = total_quantity_item;
             return PartialView("BagCart");
         }
-        public ActionResult ThanhToan()
+        public ActionResult ThanhToan(int tongtien)
         {
+            Session["Tong"] = tongtien;
             Cart cart = Session["Cart"] as Cart;
             return View(cart);
         }

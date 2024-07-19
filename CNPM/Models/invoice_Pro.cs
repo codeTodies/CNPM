@@ -24,6 +24,7 @@ namespace CNPM.Models
         public Nullable<System.DateTime> dateOrder { get; set; }
         public Nullable<int> ID_cus { get; set; }
         public string addressDeli { get; set; }
+        public Nullable<decimal> tongTien { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<invoice_detail> invoice_detail { get; set; }

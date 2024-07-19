@@ -25,7 +25,6 @@ namespace CNPM.Models
         public string password { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
-        public Nullable<int> score { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<invoice_Pro> invoice_Pro { get; set; }

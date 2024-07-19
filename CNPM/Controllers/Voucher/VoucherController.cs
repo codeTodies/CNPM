@@ -58,7 +58,6 @@ namespace CNPM.Controllers.Voucher
             {
                 if (ModelState.IsValid)
                 {
-                    pro.status = true;
                     db.Sale_promotion.Add(pro);
                     db.SaveChanges();
                     return RedirectToAction("Index");
