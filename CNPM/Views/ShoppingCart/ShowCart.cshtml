@@ -31,11 +31,44 @@
     a {
         text-decoration: none;
     }
+
+    /* Voucher Button Styling */
+    .btn-voucher {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #28a745; /* Green */
+        color: #ffffff;
+        border-radius: 25px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .btn-voucher:hover {
+            background-color: #218838; /* Darker green */
+            transform: scale(1.05);
+        }
+
+    .voucher-input {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+        .voucher-input input {
+            margin-right: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            flex-grow: 1;
+        }
 </style>
+
 @if (Model != null)
 {
     <h2>Giỏ hàng</h2>
-    <a href="@Url.Action("Index","Product")"> Tiếp tục mua</a>
+    <a href="@Url.Action("Index", "Product")"> Tiếp tục mua</a>
     <table class="table">
         <thead>
             <tr>
@@ -74,20 +107,44 @@
             }
         </tbody>
         <tfoot>
-            
             <tr>
                 <td colspan="7" style="text-align: right;">
                     <div class="order-total">
-                        <h3>Tổng giá trị đơn hàng: @orderTotal</h3>
+                        @if (Session["Voucher"] != null)
+                        {
+                            int per = (int)Session["Voucher"];
+                            orderTotal = orderTotal - (orderTotal * per / 100);
+                        }
+                        <h3>Tổng giá trị đơn hàng: @orderTotal VND</h3>
                     </div>
                     <a href="@Url.Action("ThanhToan", "ShoppingCart")" class="btn-checkout"> Thanh toán</a>
                 </td>
             </tr>
         </tfoot>
-
     </table>
+
+    <div class="voucher-input">
+        @using (Html.BeginForm("ApplyVoucher", "ShoppingCart", FormMethod.Post))
+        {
+            <input type="number" name="voucherCode" placeholder="Nhập mã voucher" />
+            <button type="submit" class="btn-voucher">Áp dụng</button>
+            @Html.Hidden("total", orderTotal)
+        }
+    </div>
 }
 else
 {
     @Html.Partial("EmptyCart")
+}
+@if (TempData["VoucherSuccess"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["VoucherSuccess"]
+    </div>
+}
+@if (TempData["VoucherError"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["VoucherError"]
+    </div>
 }

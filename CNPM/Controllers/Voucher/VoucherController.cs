@@ -27,7 +27,7 @@ namespace CNPM.Controllers.Voucher
                 SearchString = currentFilter;
             }
             ViewBag.CurrentFilter = SearchString;
-            var courses = from c in db.Product_title
+            var courses = from c in db.Sale_promotion
                           select c;
             if (!string.IsNullOrEmpty(SearchString))
             {
@@ -48,31 +48,20 @@ namespace CNPM.Controllers.Voucher
         }
         public ActionResult Create()
         {
-            Product_title product = new Product_title();
+            Sale_promotion product = new Sale_promotion();
             return View(product);
         }
         [HttpPost]
-        public ActionResult Create(Product_title pro)
+        public ActionResult Create(Sale_promotion pro)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (pro.UploadImage != null)
-                    {
-                        string fileName = Path.GetFileNameWithoutExtension(pro.UploadImage.FileName);
-                        string extend = Path.GetExtension(pro.UploadImage.FileName);
-                        fileName = fileName + extend;
-                        pro.ImagePro = "~/Content/Image/" + fileName;
-                        pro.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/Image/"), fileName));
-                        db.Product_title.Add(pro);
-                        CNPM.Models.Product product = new CNPM.Models.Product();
-                        product.IDBook = pro.ID;
-                        product.quantity = 0;
-                        db.Product.Add(product);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
+                    pro.status = true;
+                    db.Sale_promotion.Add(pro);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
                 return View(pro);
             }
@@ -81,28 +70,13 @@ namespace CNPM.Controllers.Voucher
                 return View(pro);
             }
         }
-        public ActionResult SelectCate()
-        {
-            Category se_cate = new Category();
-            se_cate.listCate = db.Categories.ToList<Category>();
-            return PartialView(se_cate);
-        }
-        public ActionResult SelectPublish()
-        {
-            CNPM.Models.Publisher se_publish = new Models.Publisher();
-            se_publish.listPublisher = db.Publishers.ToList<Models.Publisher>();
-            return PartialView(se_publish);
-        }
         public ActionResult Detail(int id)
         {
-            return View(db.Product_title.Where(s => s.ID == id).FirstOrDefault());
+            return View(db.Sale_promotion.Where(s => s.ID == id).FirstOrDefault());
         }
         public ActionResult Edit(int? id)
         {
-            var product = db.Product_title.Where(s => s.ID == id).FirstOrDefault();
-            ViewBag.Cate = new SelectList(db.Categories.OrderBy(r => r.name), "ID", "name", product.category);
-            ViewBag.Publish = new SelectList(db.Publishers.OrderBy(r => r.name), "ID", "name", product.publisher);
-            Session["imgPath"] = product.ImagePro;
+            var product = db.Sale_promotion.Where(s => s.ID == id).FirstOrDefault();
             if (product == null)
             {
                 return HttpNotFound(); // Trả về lỗi 404 nếu không tìm thấy đối tượng
@@ -115,57 +89,18 @@ namespace CNPM.Controllers.Voucher
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(Product_title product)
+        public ActionResult Edit(Sale_promotion sale)
         {
             if (ModelState.IsValid)
             {
-
-                if (product.UploadImage != null)
+                db.Entry(sale).State = EntityState.Modified;
+                if (db.SaveChanges() > 0)
                 {
-                    string fileName = Path.GetFileNameWithoutExtension(product.UploadImage.FileName);
-                    string extend = Path.GetExtension(product.UploadImage.FileName);
-                    fileName = fileName + extend;
-                    product.ImagePro = "~/image/" + fileName;
-                    if (extend.ToLower() == ".jpg" || extend.ToLower() == ".jpeg" || extend.ToLower() == ".png")
-                    {
-                        if (product.UploadImage.ContentLength <= 6000000)
-                        {
-                            db.Entry(product).State = EntityState.Modified;
-
-                            string oldImgPath = Request.MapPath(Session["imgPath"].ToString());
-                            if (db.SaveChanges() > 0)
-                            {
-                                product.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/image/"), fileName));
-                                if (System.IO.File.Exists(oldImgPath))
-                                {
-                                    System.IO.File.Delete(oldImgPath);
-                                }
-                                TempData["nofi"] = "Cập nhật thành công";
-                                return RedirectToAction("Index");
-                            }
-                        }
-                        else
-                        {
-                            ViewBag.nofi = "File Size must be Equal or less than 6mb";
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.nofi = "Invalid File Type";
-                    }
+                    TempData["nofi"] = "Cập nhật thành công";
                 }
-                else
-                {
-                    product.ImagePro = Session["imgPath"].ToString();
-                    db.Entry(product).State = EntityState.Modified;
-                    if (db.SaveChanges() > 0)
-                    {
-                        TempData["nofi"] = "Cập nhật thành công";
-                        return RedirectToAction("Index");
-                    }
-                }
+                return RedirectToAction("Index");
             }
-            return View();
+            return View(sale);
         }
     }
 }

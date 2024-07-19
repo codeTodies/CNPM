@@ -10,6 +10,7 @@ namespace CNPM.Models
     public partial class CartItem
     {
         public Product product { get; set; }
+        public Sale_promotion sale_Promotion { get; set; }
         public int quantity { get; set; }
     }
     [Table("Cart")]
@@ -39,6 +40,15 @@ namespace CNPM.Models
         public int TotalQuantity()
         {
             return items.Sum(s => s.quantity);
+        }
+        public decimal CalculateTotal(Sale_promotion voucher = null)
+        {
+            var total = items.Sum(s => s.quantity * s.product.Product_title.giaBia);
+            if (voucher != null && total >= voucher.condition)
+            {
+                total -= total * (voucher.score / 100);
+            }
+            return (decimal)total;
         }
         public decimal TotalMoney()
         {

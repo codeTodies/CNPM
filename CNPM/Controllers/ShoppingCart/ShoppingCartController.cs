@@ -73,6 +73,21 @@ namespace CNPM.Controllers.ShoppingCart
             cart.UpdateQuantity(id_pro, quantity);
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
+        [HttpPost]
+        public ActionResult ApplyVoucher(int voucherCode, int total)
+        {
+            var check = database.Sale_promotion.Where(s=>s.ID == voucherCode).FirstOrDefault();
+            if (check != null && check.dateEnd > DateTime.Now && check.condition < total)
+            {
+                Session["Voucher"] = check.score;
+                TempData["VoucherSuccess"] = "Áp dụng voucher thành công";
+            }
+            else
+            {
+                TempData["VoucherError"] = "Mã voucher không hợp lệ hoặc đã hết hạn.";
+            }
+            return RedirectToAction("ShowCart", "ShoppingCart");
+        }
         public ActionResult RemoveCart(int id)
         {
             Cart cart = Session["Cart"] as Cart;

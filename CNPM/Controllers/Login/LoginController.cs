@@ -82,13 +82,17 @@ namespace CNPM.Controllers.Login
             else
             {
                 db.Configuration.ValidateOnSaveEnabled = false;
-                Session["NameUser"] = staff.name;
+                Session["NameUsers"] = staff.name;
                 Session["UserRole"] = check.role;
                 Session["PasswordUser"] = staff.password;
                 if(check.role=="Nhân viên kho")
                 {
                     return RedirectToAction("Index", "Storage");
-                }   
+                }
+                if(check.role == "Nhân viên chăm sóc khách hàng")
+                {
+                    return RedirectToAction("Index", "Voucher");
+                }    
                 else
                 {
                     return RedirectToAction("Index", "Users");

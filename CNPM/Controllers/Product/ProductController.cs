@@ -49,6 +49,8 @@ namespace CNPM.Controllers.Product
         public ActionResult Create()
         {
             Product_title product = new Product_title();
+            ViewBag.Cate = new SelectList(db.Categories.OrderBy(r => r.name), "ID", "name", product.category);
+            ViewBag.Publish = new SelectList(db.Publishers.OrderBy(r => r.name), "ID", "name", product.publisher);
             return View(product);
         }
         [HttpPost]

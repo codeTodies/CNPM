@@ -20,12 +20,12 @@
                     @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
                 <div class="form-group">
-                    <div>Ngày bắt đầu: </div>
-                    @Html.EditorFor(model => model.dateStart, new { htmlAttributes = new { @class = "form-control" } })
+                    <div>Ngày bắt đầu:</div>
+                    @Html.EditorFor(model => model.dateStart, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 </div>
                 <div class="form-group">
-                    <div>Ngày kết thúc: </div>
-                    @Html.EditorFor(model => model.dateEnd, new { htmlAttributes = new { @class = "form-control" } })
+                    <div>Ngày kết thúc:</div>
+                    @Html.EditorFor(model => model.dateEnd, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 </div>
                 <div class="form-group">
                     <div>Điều kiện (giá trị đơn hàng trên): </div>
