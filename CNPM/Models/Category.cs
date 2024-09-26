@@ -25,6 +25,8 @@ namespace CNPM.Models
         }
     
         public int ID { get; set; }
+        [Required(ErrorMessage = "Field can not be empty.")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Length of name must between 3 and 100 character")]
         public string name { get; set; }
         [NotMapped]
         public List<Category> listCate { get; set; }

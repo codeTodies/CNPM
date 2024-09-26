@@ -11,7 +11,8 @@ namespace CNPM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class invoice_Pro
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,7 @@ namespace CNPM.Models
         public int ID { get; set; }
         public Nullable<System.DateTime> dateOrder { get; set; }
         public Nullable<int> ID_cus { get; set; }
+        [Required(ErrorMessage = "Address is required.")]
         public string addressDeli { get; set; }
         public Nullable<decimal> tongTien { get; set; }
     

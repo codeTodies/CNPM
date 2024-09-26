@@ -1,7 +1,7 @@
 ﻿@model CNPM.Models.Publisher
 
 @{
-    Layout = null;
+    Layout = "~/Views/_LayoutAdmin.cshtml";
 }
 
 <html>
@@ -12,6 +12,7 @@
     <link href="~/Content/style.css" rel="stylesheet" />
 </head>
 <body>
+    <h2 class="text-center">Tạo mới nhà xuất bản</h2>
     @using (Html.BeginForm("Create", "Publisher", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form" }))
     {
         <div class="container">
@@ -20,6 +21,7 @@
                     <div class="form-group">
                         Tên nhà xuất bản:
                         @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                     </div>
                     <div style="text-align:center">
                         <button type="submit" class="btn-login">Tạo mới</button>

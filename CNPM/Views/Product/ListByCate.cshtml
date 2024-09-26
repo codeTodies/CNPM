@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CNPM.Models.Product_title>
+
+@{
+    Layout = null;
+}
+<style>
+    .product-cards {
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .cards {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+
+        .cards:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-imgs {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            height: 400px;
+            width: 100%;
+        }
+
+    .card-contents {
+        padding: 10px;
+        background-color: white;
+    }
+
+    .card-titles {
+        font-size: 18px;
+        margin: 0;
+        color: #333;
+    }
+
+    .card-texts {
+        color: #555;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-3 product-cards">
+                <div class="cards">
+                    <a href="@Url.Action("Detail", "Product", new { id = product.ID })" class="card-links">
+                        <img src="@Url.Content(product.ImagePro)" class="card-imgs" alt="@product.name">
+                        <div class="card-contents">
+                            <h5 class="card-titles text-truncate">@product.name</h5>
+                            <p class="card-texts">@product.giaBia đ</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

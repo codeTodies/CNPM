@@ -52,7 +52,7 @@ namespace CNPM.Controllers
             {
                 courses = courses.Where(c => c.category == category);
             }    
-            int pageSize = 5;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
             return View(courses.ToPagedList(pageNumber, pageSize));
         }

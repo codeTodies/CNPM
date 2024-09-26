@@ -307,6 +307,11 @@
     <Content Include="Views\Layout\Layout_Voucher.cshtml" />
     <Content Include="Views\Voucher\Index.cshtml" />
     <Content Include="Views\Voucher\Create.cshtml" />
+    <Content Include="Views\Voucher\PersonalVoucher.cshtml" />
+    <Content Include="Views\Voucher\Edit.cshtml" />
+    <Content Include="Views\Voucher\Detail.cshtml" />
+    <Content Include="Views\Product\ListByCate.cshtml" />
+    <Content Include="Views\Voucher\Detail4User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

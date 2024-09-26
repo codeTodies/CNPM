@@ -46,6 +46,13 @@ namespace CNPM.Controllers.Product
             int pageNumber = (page ?? 1);
             return View(courses.ToPagedList(pageNumber, pageSize));
         }
+        public ActionResult ListByCate(int id, int bookID)
+        {
+            var courses = (from c in db.Product_title
+                           where c.category == id && c.ID != bookID
+                           select c).Take(4);
+            return View(courses.ToList());
+        }
         public ActionResult Create()
         {
             Product_title product = new Product_title();

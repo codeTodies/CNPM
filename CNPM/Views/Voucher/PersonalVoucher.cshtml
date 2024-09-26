@@ -1,0 +1,30 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList <CNPM.Models.Sale_promotion>
+
+@{
+    Layout = null;
+}
+
+<link href="@Url.Content("~/Content/personal.css")" rel="stylesheet" type="text/css" />
+<h2>Danh sách Voucher</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Voucher</th>
+            <th>Điều kiện</th>
+            <th>Ngày hết hạn</th>
+            <th>Chi tiết</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => order.code)</td>
+                <td>@Html.DisplayFor(modelItem => order.condition)</td>
+                <td>@Html.DisplayFor(modelItem => order.dateEnd)</td>
+                <td><a href="@Url.Action("Detail4User", "Voucher", new { id = order.ID })">Chi tiết</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

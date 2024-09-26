@@ -11,10 +11,12 @@ namespace CNPM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Product
     {
         public int IDBook { get; set; }
+        [Required(ErrorMessage = "Quantity is required.")]
         public Nullable<int> quantity { get; set; }
     
         public virtual Product_title Product_title { get; set; }

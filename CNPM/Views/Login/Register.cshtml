@@ -23,6 +23,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <form action="">
             <h1>Đăng ký</h1>
+            <p style="color:red;text-align:center">@ViewBag.ErrorRegister</p>
             <div class="input-box">
                 @Html.TextBox("name", null, new { @class = "form-control input_user", placeholder = "Tên đăng nhập" })
                 <i class='bx bxs-user'></i>
@@ -34,9 +35,9 @@
             <div class="input-box">
                 @Html.Password("password", null, new { @class = "form-control input_pass", placeholder = "Mật khẩu" })
                 <i class='bx bxs-lock-alt'></i>
-            </div>
-            <div>
-                @Html.ValidationMessageFor(model => model.password)
+                <div>
+                    @Html.ValidationMessageFor(model => model.password)
+                </div>
             </div>
             <div class="input-box">
                 @Html.TextBox("email", null, new { @class = "form-control input_pass", placeholder = "Email" })
@@ -53,7 +54,7 @@
                 </div>
             </div>
             <div style="text-align:center">
-                <button type="submit" class="btn-login">Đăng ký</button>
+                <button type="submit" class="btn btn-success">Đăng ký</button>
             </div>
             <div class="register-link">
                 <p>Đã Có tài khoản ? <a href="~/Login/Login">Đăng nhập</a></p>

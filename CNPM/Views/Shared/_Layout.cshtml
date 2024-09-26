@@ -5,45 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nhà sách ABC</title>
     <link href="@Url.Content("~/Content/Styles.css")" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<style>
-    /* Account button styling */
-    .account-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #ec3838; /* Main color */
-        color: white;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-        text-align: center;
-        text-decoration: none;
-    }
 
-        .account-btn:hover {
-            background-color: #cc0000; /* Darker red */
-            transform: scale(1.05);
-        }
-
-    /* Account greeting text */
-    .account-greeting {
-        font-size: 14px;
-        margin-right: 10px;
-    }
-
-    .navbtn .name {
-        margin-top: 5px;
-        color: white;
-        font-size: 15px;
-        text-align: center;
-    }
-</style>
 <body>
     <header>
         <div class="topnav">
@@ -71,7 +37,7 @@
                 <a href="@Url.Action("ShowCart", "ShoppingCart")" class="icon-link">
                     <button type="button" class="cart-btn">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        @Html.Action("BagCart","ShoppingCart")
+                        @Html.Action("BagCart", "ShoppingCart")
                         <span class="sr-only">Giỏ hàng</span>
                     </button>
                 </a>
@@ -96,20 +62,66 @@
             {
                 <div class="navbtn">
                     <a href="@Url.Action("PersonalInfo", "Users", new { id = (int)Session["IdUser"] })" class="icon-link">
-                       <div>Chào mừng bạn, @Session["NameUser"]</div>
-                       <span class="sr-only">Tài khoản</span>
+                        <div>Chào mừng bạn, @Session["NameUser"]</div>
+                        <span class="sr-only">Tài khoản</span>
                     </a>
                 </div>
             }
         </div>
     </header>
 
-    <div class="container body-content">
+    <div class="container-fluid">
         @RenderBody()
     </div>
 
-    <footer>
-        <!-- Footer content here -->
+    <footer class="bg-dark text-white mt-5 p-4">
+        <div class="container">
+            <div class="row">
+                <!-- About section -->
+                <div class="col-md-4">
+                    <h5>Về Nhà sách ABC</h5>
+                    <p>Nhà sách ABC là nơi cung cấp sách đa dạng thể loại với chất lượng tốt nhất.</p>
+                </div>
+
+                <!-- Quick links -->
+                <div class="col-md-4">
+                    <h5>Liên kết nhanh</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="@Url.Action("Index", "Home")" class="text-white">Trang chủ</a></li>
+                        <li><a href="@Url.Action("About", "Home")" class="text-white">Về chúng tôi</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")" class="text-white">Liên hệ</a></li>
+                        <li><a href="@Url.Action("Privacy", "Home")" class="text-white">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact and social media -->
+                <div class="col-md-4">
+                    <h5>Liên hệ</h5>
+                    <p>Email: support@nhasachabc.com</p>
+                    <p>Điện thoại: 123-456-7890</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white mr-2">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white mr-2">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white mr-2">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col text-center">
+                    <p>&copy; 2024 Nhà sách ABC. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")

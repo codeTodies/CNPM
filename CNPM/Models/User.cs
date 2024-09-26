@@ -11,7 +11,8 @@ namespace CNPM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +22,21 @@ namespace CNPM.Models
         }
     
         public int ID { get; set; }
+        [Required(ErrorMessage = "Name is required.")]
         public string name { get; set; }
+
+        [Required(ErrorMessage = "Password is required.")]
+        [MinLength(4, ErrorMessage = "Password must be at least 4 characters long.")]
         public string password { get; set; }
+
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address.")]
         public string email { get; set; }
+
+        [Required(ErrorMessage = "Phone is required.")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be 10 digits long.")]
         public string phone { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<invoice_Pro> invoice_Pro { get; set; }
     }

@@ -5,8 +5,8 @@
     Layout = "~/Views/Layout/Layout_Voucher.cshtml";
 }
 
-<h2>Create</h2>
-
+<h2>Tạo chương trình</h2>
+<p style="color:red;text-align:center">@ViewBag.ErrorVoucher</p>
 
 @using (Html.BeginForm())
 {
@@ -18,27 +18,38 @@
                 <div class="form-group">
                     <div>Tên chương trình: </div>
                     @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <div>Mã Voucher: </div>
+                    @Html.EditorFor(model => model.code, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.code, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <div>Ngày bắt đầu:</div>
                     @Html.EditorFor(model => model.dateStart, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.dateStart, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <div>Ngày kết thúc:</div>
                     @Html.EditorFor(model => model.dateEnd, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.dateEnd, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <div>Điều kiện (giá trị đơn hàng trên): </div>
                     @Html.EditorFor(model => model.condition, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.condition, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <div>Mô tả: </div>
                     @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
                     <div>Phần trăm giảm: </div>
                     @Html.EditorFor(model => model.percentage, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.percentage, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Submit" class="btn btn-primary" />

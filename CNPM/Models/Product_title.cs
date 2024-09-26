@@ -27,12 +27,24 @@ namespace CNPM.Models
         }
     
         public int ID { get; set; }
+        [Required(ErrorMessage = "Name is required.")]
         public string name { get; set; }
-        public Nullable<int> publishing_year { get; set; }
-        public Nullable<int> publisher { get; set; }
-        public Nullable<int> category { get; set; }
+
+        [Required(ErrorMessage = "Publishing year is required.")]
+        public int? publishing_year { get; set; }
+
+        [Required(ErrorMessage = "Publisher is required.")]
+        public int? publisher { get; set; }
+
+        [Required(ErrorMessage = "Category is required.")]
+        public int? category { get; set; }
+
+        [Required(ErrorMessage = "Author is required.")]
         public string author { get; set; }
-        public Nullable<double> giaBia { get; set; }
+
+        [Required(ErrorMessage = "Price (giaBia) is required.")]
+        [Range(0, double.MaxValue, ErrorMessage = "Price (giaBia) must be a non-negative number.")]
+        public double? giaBia { get; set; }
         public string ImagePro { get; set; }
 
         [NotMapped]

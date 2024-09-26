@@ -44,7 +44,7 @@ namespace CNPM.Controllers.Categories
                     courses = courses.OrderBy(c => c.name);
                     break;
             }
-            int pageSize = 5;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(courses.ToPagedList(pageNumber, pageSize));
 
@@ -56,9 +56,16 @@ namespace CNPM.Controllers.Categories
         [HttpPost]
         public ActionResult Create(Category category)
         {
+            try
+            {
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(category);
+            }
 
         }
         public ActionResult Edit(int? id)

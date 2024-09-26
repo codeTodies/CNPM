@@ -26,7 +26,7 @@
         <thead>
             <tr>
                 <th>
-                    ID
+                    STT
                 </th>
                 <th>
                     @Html.ActionLink("Tên loại", "Index", new { SortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -35,11 +35,15 @@
             </tr>
         </thead>
         <tbody>
+            @* Initialize counter *@
+            @{
+                int counter = 1;
+            }
             @foreach (var item in Model)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ID)
+                        @counter
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
@@ -51,6 +55,8 @@
                         </div>
                     </td>
                 </tr>
+                @* Increment counter *@
+                counter++;
             }
         </tbody>
     </table>

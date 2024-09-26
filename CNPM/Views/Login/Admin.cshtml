@@ -29,20 +29,20 @@
                 <div class="input-box">
                     @Html.TextBox("name", null, new { @class = "form-control input_user", placeholder = "Tên đăng nhập" })
                     <i class='bx bxs-user'></i>
-                </div>
-                <div>
-                    @Html.ValidationMessageFor(model => model.name)
+                    <div>
+                        @Html.ValidationMessageFor(model => model.name)
+                    </div>
                 </div>
                 <div class="input-box">
                     @Html.Password("password", null, new { @class = "form-control input_pass", placeholder = "Mật khẩu" })
                     <i class='bx bxs-lock-alt'></i>
-                </div>
-                <div>
-                    @Html.ValidationMessageFor(model => model.password)
+                    <div>
+                        @Html.ValidationMessageFor(model => model.password)
+                    </div>
                 </div>
                 <button type="submit" class="btn login_btn">Đăng nhập</button>
                 <div class="register-link">
-                    <p>Đăng Nhập Với Tài Khoản Người Dùng ? <a href="~/Login/Index">Đăng nhập</a></p>
+                    <p>Đăng Nhập Với Tài Khoản Người Dùng ? <a href="~/Login/Login">Đăng nhập</a></p>
                 </div>
             </form>
         }

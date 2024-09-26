@@ -54,22 +54,27 @@ namespace CNPM.Controllers.Voucher
         [HttpPost]
         public ActionResult Create(Sale_promotion pro)
         {
-            try
-            {
-                if (ModelState.IsValid)
+            var check = db.Sale_promotion.Where(s => s.code == pro.code && s.dateEnd > DateTime.Today).FirstOrDefault();
+                if(check==null)
                 {
-                    db.Sale_promotion.Add(pro);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                return View(pro);
-            }
-            catch
+                    if (ModelState.IsValid)
+                    {
+                        db.Sale_promotion.Add(pro);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }    
+            else
             {
-                return View(pro);
+                ViewBag.ErrorVoucher = "Voucher đã tồn tại và đang được sử dụng";
             }
+            return View(pro);
         }
         public ActionResult Detail(int id)
+        {
+            return View(db.Sale_promotion.Where(s => s.ID == id).FirstOrDefault());
+        }
+        public ActionResult Detail4User(int id)
         {
             return View(db.Sale_promotion.Where(s => s.ID == id).FirstOrDefault());
         }
@@ -90,16 +95,41 @@ namespace CNPM.Controllers.Voucher
         [HttpPost]
         public ActionResult Edit(Sale_promotion sale)
         {
-            if (ModelState.IsValid)
+            var check = db.Sale_promotion.Where(s => (s.code == sale.code) && s.ID != sale.ID).FirstOrDefault();
+            if (check == null)
             {
-                db.Entry(sale).State = EntityState.Modified;
-                if (db.SaveChanges() > 0)
+                if (ModelState.IsValid)
                 {
-                    TempData["nofi"] = "Cập nhật thành công";
+                    db.Entry(sale).State = EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                    {
+                        TempData["nofi"] = "Cập nhật thành công";
+                    }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.ErrorEditVoucher = "Code đã tồn tại";
             }
             return View(sale);
+        }
+
+        public ActionResult PersonalVoucher(int? page)
+        {
+            int ID = (int)Session["IdUser"];
+            var check = db.Sale_promotion
+                        .Where(d => d.dateEnd > DateTime.Today && d.dateStart <= DateTime.Today)
+                        .OrderBy(c => c.dateEnd);
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(check.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult detailOrder(int? id)
+        {
+            var check = db.invoice_Pro.SingleOrDefault(s => s.ID == id);
+            Session["Sum"] = (int)check.tongTien;
+            return View(db.invoice_detail.Where(s => s.invoiceNum == id).ToList());
         }
     }
 }

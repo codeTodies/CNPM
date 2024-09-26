@@ -58,17 +58,23 @@ namespace CNPM.Controllers.User
         [HttpPost]
         public ActionResult Create(Models.User user)
         {
-            if (ModelState.IsValid)
+            var check = db.Users.Where(s => s.email == user.email || s.phone == user.phone).FirstOrDefault();
+            if (check == null)
             {
-                db.Users.Add(user);
-                if (db.SaveChanges() > 0)
+                if (ModelState.IsValid)
                 {
-                    TempData["nofi"] = "Thêm mới thành công";
-                    ModelState.Clear();
+                    db.Users.Add(user);
+                    if (db.SaveChanges() > 0)
+                    {
+                        ModelState.Clear();
+                    }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
             }
-
+            else
+            {
+                ViewBag.ErrorCreateUser = "Email hoặc số điện thoại đã tồn tại";
+            }
             return View(user);
         }
 
@@ -92,14 +98,22 @@ namespace CNPM.Controllers.User
         [HttpPost]
         public ActionResult Edit(Models.User user)
         {
-            if (ModelState.IsValid)
+            var check = db.Users.Where(s => (s.email == user.email || s.phone == user.phone) && s.ID!= user.ID).FirstOrDefault();
+            if (check == null)
             {
-                db.Entry(user).State = EntityState.Modified;
-                if (db.SaveChanges() > 0)
+                if (ModelState.IsValid)
                 {
-                    TempData["nofi"] = "Cập nhật thành công";
+                    db.Entry(user).State = EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                    {
+                        TempData["nofi"] = "Cập nhật thành công";
+                    }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.ErrorEditUser = "Email hoặc số điện thoại đã tồn tại";
             }
             return View(user);
         }
@@ -123,12 +137,45 @@ namespace CNPM.Controllers.User
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            // Find the user by ID
             Models.User user = db.Users.Find(id);
+
+            // Check if user exists
+            if (user == null)
+            {
+                TempData["nofi"] = "Không tìm thấy người dùng";
+                return RedirectToAction("Index");
+            }
+
+            // Find all related invoice_Pro entries by the user's ID
+            var invoices_Pro = db.invoice_Pro.Where(s => s.ID_cus == id).ToList();
+
+            // If any invoice_Pro exists, delete the related invoice details and the invoices
+            if (invoices_Pro.Any())
+            {
+                // For each invoice, remove associated invoice details
+                foreach (var invoice in invoices_Pro)
+                {
+                    // Find related invoice_detail entries by invoiceNum
+                    var invoice_Details = db.invoice_detail.Where(s => s.invoiceNum == invoice.ID).ToList();
+
+                    // Remove all invoice details related to the current invoice
+                    db.invoice_detail.RemoveRange(invoice_Details);
+                }
+
+                // Remove all invoice_Pro entries related to the user
+                db.invoice_Pro.RemoveRange(invoices_Pro);
+            }
+
+            // Remove the user
             db.Users.Remove(user);
+
+            // Save changes to the database
             if (db.SaveChanges() > 0)
             {
                 TempData["nofi"] = "Xóa thành công";
             }
+
             return RedirectToAction("Index");
         }
 
@@ -162,14 +209,22 @@ namespace CNPM.Controllers.User
         [HttpPost]
         public ActionResult EditPersonal(Models.User user)
         {
-            if (ModelState.IsValid)
+            var check = db.Users.Where(s => (s.email == user.email || s.phone == user.phone) && s.ID != user.ID).FirstOrDefault();
+            if (check == null)
             {
-                db.Entry(user).State = EntityState.Modified;
-                if (db.SaveChanges() > 0)
+                if (ModelState.IsValid)
                 {
-                    TempData["nofi"] = "Cập nhật thành công";
+                    db.Entry(user).State = EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                    {
+                        TempData["nofi"] = "Cập nhật thành công";
+                    }
+                    return RedirectToAction("PersonalInfo", new { id = user.ID });
                 }
-                return RedirectToAction("PersonalInfo", new { id = user.ID });
+            }
+            else
+            {
+                ViewBag.ErrorEditUser = "Email hoặc số điện thoại đã tồn tại";
             }
             return View(user);
         }

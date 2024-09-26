@@ -13,7 +13,7 @@
         padding: 20px;
         max-width: 800px;
         margin: auto;
-        margin-top: 2rem;
+        margin-top: 5.5rem;
     }
 
     /* Customer info */
@@ -112,7 +112,7 @@
         </tbody>
     </table>
     <div class="order-total">
-        <h3>Tổng giá trị đơn hàng: @Session["Tong"]</h3>
+        <h3>Tổng giá trị đơn hàng: @TempData["Tong"] VND</h3>
     </div>
     @using (Html.BeginForm("CheckOut", "ShoppingCart"))
     {
@@ -124,6 +124,7 @@
             <tr>
                 <td></td>
                 <td>
+                    <input type="hidden" name="TotalAmount" value="@TempData["Tong"]" />
                     <input type="submit" value="CheckOut" class="btn btn-success" />
                 </td>
             </tr>

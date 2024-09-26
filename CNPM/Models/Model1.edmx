@@ -64,6 +64,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="char" MaxLength="10" />
           <Property Name="name" Type="nvarchar" MaxLength="30" />
           <Property Name="condition" Type="int" />
           <Property Name="description" Type="nvarchar" MaxLength="60" />
@@ -285,6 +286,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="condition" Type="Int32" />
           <Property Name="description" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
@@ -502,6 +504,7 @@
             <EntityTypeMapping TypeName="BookStoreModel.Sale_promotion">
               <MappingFragment StoreEntitySet="Sale_promotion">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="condition" ColumnName="condition" />
                 <ScalarProperty Name="description" ColumnName="description" />

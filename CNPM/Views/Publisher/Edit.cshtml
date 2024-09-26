@@ -1,7 +1,7 @@
 ﻿@model CNPM.Models.Publisher
 
 @{
-    Layout = null;
+    Layout = "~/Views/_LayoutAdmin.cshtml";
 }
 
 <!DOCTYPE html>
@@ -10,6 +10,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="~/Content/style.css" rel="stylesheet" />
 </head>
 <body>
     @Scripts.Render("~/bundles/jquery")
@@ -32,6 +34,7 @@
                     <div class="form-group">
                         Tên NXB
                         @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                     </div>
 
 

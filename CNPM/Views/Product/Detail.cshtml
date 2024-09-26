@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "ProDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int category;
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="~/Content/Styles.css" rel="stylesheet" />
@@ -85,8 +86,28 @@
 .btn-default:hover {
     background-color: #0056b3;
     transform: scale(1.05);
-}
 
+}
+    .category-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .view-all-link {
+        font-size: 14px;
+        font-weight: normal;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .view-all-link:hover {
+            text-decoration: underline;
+        }
 </style>
 <body>
     <div class="container">
@@ -102,6 +123,8 @@
                     <p class="card-text">Thể loại: @Html.DisplayFor(model => model.Category1.name)</p>
                     <p class="card-text">Tác giả: @Html.DisplayFor(model => model.author)</p>
                     <p class="card-text"> @Html.DisplayFor(model => model.giaBia) đ</p>
+                    @{ category = Model.category ?? 0;
+                        int idbook = Model.ID;}
                     <a href="/ShoppingCart/AddToCarts/@Model.ID" class="icon-link">
                         <button type="submit" class="btn-login">
                             <i class="fa-solid fa-cart-shopping"></i>
@@ -117,5 +140,12 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        <h3 class="category-heading">
+            Các tác phẩm cùng thể loại
+            @Html.ActionLink("Xem tất cả", "Index", "Home", new { category = category }, new { @class = "button" })
+        </h3>
+        @{ Html.RenderAction("ListByCate", "Product", new { id = category, bookID=idbook }); }
     </div>
 </body>

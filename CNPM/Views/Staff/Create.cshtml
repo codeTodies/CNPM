@@ -1,7 +1,7 @@
 ﻿@model CNPM.Models.Staff
 
 @{
-    Layout = null;
+    Layout = "~/Views/_LayoutAdmin.cshtml";
 }
 
 <!DOCTYPE html>
@@ -17,8 +17,8 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 
-    <h2 class="text-center">Tạo tài khoản</h2>
-
+    <h2 class="text-center">Tạo tài khoản nhân viên</h2>
+    <p style="color:red;text-align:center">@ViewBag.ErrorCreateStaff</p>
 
     @using (Html.BeginForm())
     {

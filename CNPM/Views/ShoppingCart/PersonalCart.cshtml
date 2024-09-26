@@ -10,6 +10,7 @@
         <tr>
             <th>Mã đơn hàng</th>
             <th>Ngày đặt</th>
+            <th>Tổng tiền</th>
             <th>Chi tiết</th>
         </tr>
     </thead>
@@ -19,6 +20,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => order.invoice_Pro.ID)</td>
                 <td>@Html.DisplayFor(modelItem => order.invoice_Pro.dateOrder)</td>
+                <td>@Html.DisplayFor(modelItem => order.invoice_Pro.tongTien)</td>
                 <td><a href="@Url.Action("detailOrder", "ShoppingCart", new { id = order.invoice_Pro.ID })">Chi tiết</a></td>
             </tr>
         }

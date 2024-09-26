@@ -1,7 +1,7 @@
 ﻿@model CNPM.Models.Staff
 
 @{
-    Layout = null;
+    Layout = "~/Views/_LayoutAdmin.cshtml";
 }
 <!DOCTYPE html>
 
@@ -17,6 +17,7 @@
 
 
     <h2 class="text-center">Chỉnh sửa thông tin nhân viên</h2>
+    <p style="color:red;text-align:center">@ViewBag.ErrorEditStaff</p>
 
 
     @using (Html.BeginForm())

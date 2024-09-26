@@ -1,7 +1,7 @@
 ﻿@model CNPM.Models.User
 
 @{
-    Layout = null;
+    Layout = "~/Views/_LayoutAdmin.cshtml";
 }
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
 
 
     <h2 class="text-center">Chỉnh sửa thông tin người dùng</h2>
-
+    <p style="color:red;text-align:center">@ViewBag.ErrorEditUser</p>
 
     @using (Html.BeginForm())
     {

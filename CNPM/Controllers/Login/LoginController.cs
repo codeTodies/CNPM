@@ -53,16 +53,23 @@ namespace CNPM.Controllers.Login
         [HttpPost]
         public ActionResult Register(Models.User user)
         {
-            if (ModelState.IsValid)
+            var check = db.Users.Where(s => s.email == user.email || s.phone == user.phone).FirstOrDefault();
+            if(check == null)
             {
-                db.Users.Add(user);
-                if (db.SaveChanges() > 0)
+                if (ModelState.IsValid)
                 {
-                    ModelState.Clear();
+                    db.Users.Add(user);
+                    if (db.SaveChanges() > 0)
+                    {
+                        ModelState.Clear();
+                    }
+                    return RedirectToAction("Login");
                 }
-                return RedirectToAction("Login");
             }
-
+            else
+            {
+                ViewBag.ErrorRegister = "Email hoặc số điện thoại đã tồn tại";
+            }
             return View(user);
         }
         public ActionResult Admin()
@@ -89,7 +96,7 @@ namespace CNPM.Controllers.Login
                 {
                     return RedirectToAction("Index", "Storage");
                 }
-                if(check.role == "Nhân viên chăm sóc khách hàng")
+                if(check.role == "Nhân viên kinh doanh")
                 {
                     return RedirectToAction("Index", "Voucher");
                 }    

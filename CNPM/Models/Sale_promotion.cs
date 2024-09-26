@@ -11,15 +11,25 @@ namespace CNPM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Sale_promotion
     {
         public int ID { get; set; }
+        [Required(ErrorMessage = "Code is required.")]
+        public string code { get; set; }
+        [Required(ErrorMessage = "Name is required.")]
         public string name { get; set; }
+        [Required(ErrorMessage = "Condition is required.")]
         public Nullable<int> condition { get; set; }
+        [Required(ErrorMessage = "Description is required.")]
         public string description { get; set; }
+        [Required(ErrorMessage = "Date Start is required.")]
         public Nullable<System.DateTime> dateStart { get; set; }
+        [Required(ErrorMessage = "Date End is required.")]
         public Nullable<System.DateTime> dateEnd { get; set; }
+        [Required(ErrorMessage = "Percentage is required.")]
+        [Range(5, 100, ErrorMessage = "Percentage must be between 5 and 100.")]
         public Nullable<int> percentage { get; set; }
     }
 }

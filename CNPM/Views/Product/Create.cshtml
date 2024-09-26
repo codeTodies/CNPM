@@ -1,7 +1,7 @@
 ﻿@model CNPM.Models.Product_title
 
 @{
-    Layout = null;
+    Layout = "~/Views/_LayoutAdmin.cshtml";
 }
 
 <!DOCTYPE html>
@@ -14,6 +14,7 @@
     <link href="~/Content/style.css" rel="stylesheet" />
 </head>
 <body>
+    <h2 class="text-center">Tạo mới sản phẩm</h2>
     @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form" }))
     {
         <div class="container">
@@ -22,28 +23,34 @@
                     <div class="form-group">
                         <div>Tên sách: </div>
                         @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         <div>Năm xuất bản: </div>
                         @Html.EditorFor(model => model.publishing_year, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.publishing_year, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         Nhà xuất bản:
                         @Html.DropDownListFor(model => model.publisher, ViewBag.Publish as SelectList, "--Chọn NXB --", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.publisher, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         Thể loại:
                         @Html.DropDownListFor(model => model.category, ViewBag.Cate as SelectList, "--Chọn Thể loại --", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.category, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         <div>Tên tác giả: </div>
                         @Html.EditorFor(model => model.author, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.author, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         <div>Giá tiền: </div>
                         @Html.EditorFor(model => model.giaBia, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.giaBia, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         <div>Chọn hình ảnh: </div>
@@ -59,7 +66,7 @@
             </div>
         </div>
     }
-    
+
     <button class="btn-login" style="color:aliceblue">
         @Html.ActionLink("Danh sách sản phẩm", "Index")
     </button>

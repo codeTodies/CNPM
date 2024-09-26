@@ -1,4 +1,15 @@
-﻿/* Button */
+﻿/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Button */
 .btn-login {
     display: inline-block;
     padding: 15px 30px;
@@ -156,12 +167,14 @@
     display: block;
 }
 
+
+
 /* Adjusted styles for smaller screens */
 @media screen and (max-width: 768px) {
     .topnav {
         flex-direction: column;
         align-items: flex-start;
-        padding: 10px;
+        padding: 5px;
     }
 
         .topnav .navbtn,
@@ -176,73 +189,43 @@
             padding: 10px;
         }
 
-        .topnav .search-container {
-            margin-top: 8px;
-            width: 100%;
-        }
-
-        .topnav input[type=text] {
-            width: calc(100% - 50px);
-        }
-
-        .topnav .search-container button {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-        }
-}
-
-/* Search container and button */
-.topnav .search-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.topnav input[type=text] {
-    padding: 6px 40px 6px 6px;
-    border: 1px solid #ec3838;
-    font-size: 17px;
-    color: #808080;
-    box-sizing: border-box;
-    width: 400px;
-    border-radius: 15px;
-    transition: width 0.3s;
-}
-
-    .topnav input[type=text]:focus {
-        width: 500px;
+    .dropdown-content a {
+        display: block;
+        width: 100%;
     }
-
-.topnav .search-container button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 15px;
-    padding: 6px 10px;
-    background: #cc0000;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    color: white;
-    transition: background 0.3s;
 }
+/*.form-controls {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.form-inlines .form-controls {
+    display: inline-block;
+    width: 30rem;
+    vertical-align: middle;
+}*/
 
-    .topnav .search-container button:hover {
-        background: #b81a1a;
-    }
-
-/* Slideshow container */
+/* Slideshow */
 .slideshow-container {
-    max-width: 1000px;
+    max-width: 100%;
     position: relative;
     margin: auto;
-    overflow: hidden;
 }
 
 .mySlides {
     display: none;
+    width: 100%;
+    height: auto;
 }
 
 .prev, .next {
@@ -250,12 +233,12 @@
     position: absolute;
     top: 50%;
     width: auto;
-    margin-top: -22px;
     padding: 16px;
+    margin-top: -22px;
     color: white;
     font-weight: bold;
     font-size: 18px;
-    transition: background-color 0.6s ease;
+    transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
 }
@@ -269,14 +252,10 @@
         background-color: rgba(0, 0, 0, 0.8);
     }
 
-.text {
-    color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
+.dot-container {
     text-align: center;
+    padding: 10px;
+    background: #ffffff;
 }
 
 .dot {
@@ -294,69 +273,105 @@
         background-color: #717171;
     }
 
-.fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
+/* Product Cards */
+.product-card {
+    padding: 15px;
+    box-sizing: border-box;
 }
 
-@keyframes fade {
-    from {
-        opacity: .4
-    }
-
-    to {
-        opacity: 1
-    }
-}
-
-/* Product card */
 .card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    margin: 20px auto;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    border-radius: 15px;
-    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
 }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
 
     .card img {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        height: 400px;
+        object-fit: cover;
         width: 100%;
-        height: auto;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
     }
 
 .card-content {
-    padding: 20px;
+    padding: 10px;
+    background-color: white;
 }
 
-.price {
-    color: #ec3838;
-    font-size: 22px;
-    margin-top: 10px;
-}
-
-.card button {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
+.card-title {
     font-size: 18px;
-    margin-top: 15px;
-    transition: opacity 0.3s;
+    margin: 0;
+    color: #333;
 }
 
-    .card button:hover {
-        opacity: 0.7;
+.card-text {
+    color: #555;
+}
+
+/* Pagination */
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .pagination-container .pagination {
+        display: inline-block;
     }
 
-/* Sidebar */
+        .pagination-container .pagination a, .pagination-container .pagination span {
+            color: #333;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+        }
+
+            .pagination-container .pagination a:hover {
+                background-color: #ddd;
+            }
+
+        .pagination-container .pagination .active a {
+            background-color: #ec3838;
+            color: white;
+            border-radius: 5px;
+        }
+
+/* Filter Bar */
+.filter-bar {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-link {
+    color: #ec3838;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+    .filter-link:hover {
+        color: #cc0000;
+    }
+
+.content-wrapper {
+    display: flex;
+}
+
+
+.main-content {
+    margin-left: 220px;
+    padding: 15px;
+    flex: 1;
+}
 .sidedmsp {
+    max-height: 25.2rem; /* Set the height based on your design needs */
+    overflow-y: auto; /* Enable vertical scrolling */
     height: 100%;
     width: 200px;
     position: fixed;
@@ -366,6 +381,7 @@
     overflow-x: hidden;
     padding-top: 60px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 2.5rem;
 }
 
     .sidedmsp .button {
@@ -384,40 +400,6 @@
         .sidedmsp .button:hover {
             background-color: #b81a1a;
         }
-
-/* Sidebar content */
-.sidebttncontent {
-    margin-left: 220px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-left: none;
-    height: auto;
-    min-height: 300px;
-    border-radius: 15px;
-}
-
-/* Additional styles for better spacing */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
-.container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-@media screen and (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
-
-    .sidebttncontent {
-        margin-left: 0;
-    }
-}
-
 /*Giỏ hàng*/
 /* Cart Button Styling */
 .cart-btn {
@@ -445,19 +427,38 @@ body {
         margin-right: 8px;
     }
 
-
-.navbtn .name {
-    margin-top: 5px;
-    color: white;
-    font-size: 15px;
-    text-align: center;
-}
-
-/* General Styles */
-.navbtn {
+/* Search container and button */
+.topnav .search-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin: 0 10px; /* Adjust spacing between navbtn elements */
+    position: relative;
+    margin-top: 8px;
 }
 
+.topnav input[type=text] {
+    padding: 6px 40px 6px 6px;
+    border: none;
+    font-size: 17px;
+    color: #808080;
+    box-sizing: border-box;
+    width: 1000px; /* Adjust width for search input */
+    border-radius: 15px;
+}
+
+.topnav .search-container button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 15px;
+    padding: 6px 10px;
+    background: #cc0000;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+    .topnav .search-container button:hover {
+        background: #b81a1a; /* Darker red */
+    }

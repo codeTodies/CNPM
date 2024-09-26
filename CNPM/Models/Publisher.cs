@@ -26,8 +26,8 @@ namespace CNPM.Models
         }
     
         public int ID { get; set; }
+        [Required(ErrorMessage = "Publisher is required.")]
         public string name { get; set; }
-
         [NotMapped]
         public List<Publisher> listPublisher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -74,12 +74,12 @@ namespace CNPM.Controllers.ShoppingCart
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
         [HttpPost]
-        public ActionResult ApplyVoucher(int voucherCode, int total)
+        public ActionResult ApplyVoucher(string voucherCode, int total)
         {
-            var check = database.Sale_promotion.Where(s=>s.ID == voucherCode).FirstOrDefault();
+            var check = database.Sale_promotion.Where(s=>s.code == voucherCode).FirstOrDefault();
             if (check != null && check.dateEnd > DateTime.Now && check.condition < total)
             {
-                Session["Voucher"] = check.percentage;
+                TempData["Voucher"] = check.percentage;
                 TempData["VoucherSuccess"] = "Áp dụng voucher thành công";
             }
             else
@@ -107,7 +107,7 @@ namespace CNPM.Controllers.ShoppingCart
         }
         public ActionResult ThanhToan(int tongtien)
         {
-            Session["Tong"] = tongtien;
+            TempData["Tong"] = tongtien;
             Cart cart = Session["Cart"] as Cart;
             return View(cart);
         }
@@ -130,11 +130,13 @@ namespace CNPM.Controllers.ShoppingCart
             try
             {
                 int ID = (int)Session["IdUser"];
+                int sum =int.Parse(form["TotalAmount"]); 
                 Cart cart = Session["Cart"] as Cart;
                 invoice_Pro order = new invoice_Pro();
-                order.dateOrder = DateTime.Now;
+                order.dateOrder = DateTime.Today;
                 order.addressDeli = form["Address"];
                 order.ID_cus = ID;
+                order.tongTien = sum;
                 database.invoice_Pro.Add(order);
                 foreach (var item in cart.Items)
                 {
@@ -166,17 +168,20 @@ namespace CNPM.Controllers.ShoppingCart
         public ActionResult PersonalCart(int? page)
         {
             int ID = (int)Session["IdUser"];
-            var check = from d in database.invoice_detail
-                        where d.invoice_Pro.ID_cus == ID
-                        select d;
-            check = check.OrderBy(c => c.invoice_Pro.dateOrder);
+            var check = database.invoice_detail
+                        .Where(d => d.invoice_Pro.ID_cus == ID)
+                        .GroupBy(d => d.invoiceNum)
+                        .Select(g => g.FirstOrDefault())
+                        .OrderBy(c => c.invoice_Pro.dateOrder);
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(check.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult detailOrder(int?id)
         {
-            return View(database.invoice_detail.Where(s => s.ID == id).ToList());
+            var check = database.invoice_Pro.SingleOrDefault(s => s.ID == id);
+            Session["Sum"] = (int)check.tongTien;
+            return View(database.invoice_detail.Where(s => s.invoiceNum == id).ToList());
         }
     }
 }

@@ -58,17 +58,24 @@ namespace CNPM.Controllers.Staff
         [HttpPost]
         public ActionResult Create(Models.Staff user)
         {
-            if (ModelState.IsValid)
+            var check = db.Staffs.Where(s => s.email == user.email || s.phone == user.phone).FirstOrDefault();
+            if (check == null)
             {
-                db.Staffs.Add(user);
-                if (db.SaveChanges() > 0)
+                if (ModelState.IsValid)
                 {
-                    TempData["nofi"] = "Thêm mới thành công";
-                    ModelState.Clear();
+                    db.Staffs.Add(user);
+                    if (db.SaveChanges() > 0)
+                    {
+                        TempData["nofi"] = "Thêm mới thành công";
+                        ModelState.Clear();
+                    }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
             }
-
+            else
+            {
+                ViewBag.ErrorCreateStaff = "Email hoặc số điện thoại đã tồn tại";
+            }
             return View(user);
         }
 
@@ -92,14 +99,22 @@ namespace CNPM.Controllers.Staff
         [HttpPost]
         public ActionResult Edit(Models.Staff user)
         {
-            if (ModelState.IsValid)
+            var check = db.Staffs.Where(s => (s.email == user.email || s.phone == user.phone) && s.ID != user.ID).FirstOrDefault();
+            if (check == null)
             {
-                db.Entry(user).State = EntityState.Modified;
-                if (db.SaveChanges() > 0)
+                if (ModelState.IsValid)
                 {
-                    TempData["nofi"] = "Cập nhật thành công";
+                    db.Entry(user).State = EntityState.Modified;
+                    if (db.SaveChanges() > 0)
+                    {
+                        TempData["nofi"] = "Cập nhật thành công";
+                    }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.ErrorEditStaff = "Email hoặc số điện thoại đã tồn tại";
             }
             return View(user);
         }
