@@ -63,12 +63,13 @@ namespace CNPM.Controllers.Login
                     {
                         ModelState.Clear();
                     }
+                    Session["Noti"] = "Đăng ký thành công";
                     return RedirectToAction("Login");
                 }
             }
             else
             {
-                ViewBag.ErrorRegister = "Email hoặc số điện thoại đã tồn tại";
+                Session["ErrorRegister"] = "Email hoặc số điện thoại đã tồn tại";
             }
             return View(user);
         }
